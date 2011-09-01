@@ -1,0 +1,31 @@
+// add to classpath:
+:cp opennlp-tools-1.5.1-incubating.jar
+:cp opennlp-maxent-3.0.1-incubating.jar
+:cp opennlp-uima-1.5.1-incubating.jar
+
+// imports
+import opennlp.maxent._
+import opennlp.tools._
+import java.io.FileInputStream
+import opennlp.tools.sentdetect._
+import scala.io._
+import opennlp.tools.namefind._
+import opennlp.tools.util._
+
+// models
+val modelIn = new FileInputStream("en-sent.bin") 
+val model = new SentenceModel(modelIn)
+val sentenceDetector = new SentenceDetectorME(model)
+modelIn.close
+
+def openSample(file: String): BufferedSource = {
+    new BufferedSource(new FileInputStream(file)) }
+    // returns Source of sample file
+
+val ww2file = openSample("ww2sample.txt")
+val ww2sentences = sentenceDetector.sentDetect(ww2file mkString)
+//returns array of sentences (Strings)
+
+val lineStream = new PlainTextByLineStream(new FileInputStream("en-ner-person.bin"),"UTF-8")
+val sampleStream = new NameSampleDataStream(lineStream)
+val nameModel = NameFinderME.train("en","person",sampleStream,java.util.Collections.emptyMap[String,Object],100,5)

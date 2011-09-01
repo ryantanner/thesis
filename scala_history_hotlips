@@ -1,0 +1,282 @@
+scala -version
+import scala.collection.GenTraversableOnce
+import scalanlp.)
+import scalanlp._
+import org.scalanlp.scalanlp-core._
+import org.scalanlp._
+import org.scalanlp.data_
+import org.scalanlp.data._
+import org.scalanlp.core._
+import org.scalanlp.classify._
+quit
+import opennlp.wikipedia.PageReader
+import org.apache.opennlp.wikipedia.PageReader
+import 
+import opennlp.wikipedia._
+PageReader
+new PageReader
+new PageReader(Nil)
+import opennlp.wikipedia.PageReader
+import opennlp.wikipedia.Page
+new ContentPage("","","")
+new ContentPage(3,"","")
+import opennlp.wikipedia.DumpReader
+import java.io.InputStream
+import java.io.BufferedInputStream
+val buffer = new BufferedInputStream("/mnt/wiki/enwiki-latest-pages-articles.xml")
+import java.io.FileInputStream
+val buffer = new FileInputStream("/mnt/wiki/enwiki-latest-pages-articles.xml")
+val dump = new DumpReader(buffer)
+dump hasNext
+dump next
+dump readText
+dump next
+dump readText
+import opennlp.maxent._
+import opennlp.tools.sentdetect
+import opennlp.tools
+import opennlp.maxent._
+import opennlp.tools._
+import opennlp.tools.sentdetect
+import opennlp.tools.sentdetect._
+import java.io.InputStream
+import java.io.FileInputStream
+val modelIn[InputStream] = new FileInputStream("lib/en-sent.bin")
+val modelIn = new FileInputStream("lib/en-sent.bin")
+val modelIn = new FileInputStream("en-sent.bin")
+val model = new SentenceModel(modelIn)
+import opennlp.tools.SentenceDetector._
+import opennlp.tools.sentdetect._
+val model = new SentenceModel(modelIn)
+:cp opennlp-maxent-3.0.1-incubating.jar
+import opennlp.maxent._
+val model = new SentenceModel(modelIn)
+val sentenceDetector = new SentenceDetectorME(model)
+val sentence = sentenceDetector.sentDetect(" First sentence. Last sentence. ")
+sentence
+:cp jwnl-1.3.3.jar
+import opennlp.uima._
+import org.apache.opennlp.uima._
+:cp /home/ryan/.m2/repository/org/apache/uima/uimaj-core/2.3.1/uimaj-core-2.3.1.jar
+import opennlp.uima.sentdetect._
+import opennlp.uima.sentdetect 
+:cp /home/ryan/opennlp-src/opennlp-uima/target/opennlp-uima-1.5.1-incubating.jar
+import opennlp.uima.sentdetect 
+import opennlp.uima.sentdetect._
+val lineStream
+import opennlp.tools.util.PlainTextByLineStream
+val lineStream = new PlainTextByLineStraem(new FileInputStream(")
+modelIn.close
+val lineStream = new PlainTextByLineStraem(new FileInputStream("en-sent.bin"), "UTF-8")
+val lineStream = new PlainTextByLineStream(new FileInputStream("en-sent.bin"), "UTF-8")
+val sampleStream = new S
+import opennlp.tools.sentdetect.SentenceSampleStream
+val sampleStream = new SentenceSampleStream(lineStream)
+val model = SentenceDetectorME.train("en",sampleStream, true, Nil, 5, 100)
+val model = SentenceDetectorME.train("en",sampleStream, true, , 5, 100)
+Dictionary()
+import opennlp.tools.Dictionary
+import opennlp.tools.Dictionary._
+import opennlp.tools.dictionary._
+Dictionary()
+new Dictionary()
+val model = SentenceDetectorME.train("en",sampleStream, true, new Dictionary(), 5, 100)
+val modelOut = new 
+import java.io._
+val modelOut = new BufferedOutputStream(new FileOutputStream(modelFile))
+model
+import opennlp.tools.tokenize._
+val tokenizer = new SimpleTokenizer()
+val tokenizer = new TokenizerME(new TokenizerModel(new FileInputStream("en-token.bin")))
+tokenizer.tokenize("A sentence to be tokenized.")
+val ww2 = new FileInputStream("ww2sample.txt")
+val ww2 = scala.io.Source.fromPath("ww2sample.txt")
+val ww2 = scala.io.Buffered
+val ww2 = new scala.io.BufferedSource(new FileInputStream("ww2sample.txt"))
+ww2 map { tokenizer tokenize (sentenceDetector sentDetect(_)) }
+ww2 map { (sent) => tokenizer tokenize { sentenceDetector sentDetect(sent) } }
+ww2 map {println(_)}
+ww2 forEach { (sent) => tokenizer tokenize { sentenceDetector sentDetect(sent) } }
+tokenizer tokenize { sentenceDetector sentDetect (ww2 mkString) }
+ww2 mkString
+sentenceDetector sentDetect (ww2 mkString)
+sentenceDetector sentDetect (ww2 mkString) mkString
+for (sent in sentenceDetector sentDetect (ww2 mkString)) tokenizer tokenize
+for (sent <- sentenceDetector sentDetect (ww2 mkString)) tokenizer tokenize(sent)
+def sentArray =
+for (sent <- sentenceDetector sentDetect (ww2 mkString)
+def sentArray =
+for {
+sent <- sentenceDetector sentDetect (ww2 mkString)
+} yield tokenizer.tokenize(sent)
+sentArray
+sentArray(0)
+sentArray.length
+:cp opennlp-maxent-3.0.1-incubating.jar
+:cp opennlp-tools-1.5.1-incubating.jar
+:cp /home/ryan/opennlp-src/opennlp-uima/target/opennlp-uima-1.5.1-incubating.jar
+import opennlp._
+import java.io.FileInputStream
+import opennlp.tools.tokenize._
+val modelIn = new FileInputStream("en-token.bin")
+val model = new TokenizerModel(modelIn)
+modelIn.close
+val tokenizer = new TokenizerME(model)
+tokenizer.tokenize("An input sample string")
+tokenizer.tokenizePos("An input sample sentence.")
+tokenizer.tokenizePos("An input sample sentence.") getCoveredText
+val tokens = tokenizer.tokenize("An input sample sentence.")
+val tokenProbs = tokenizer.getTokenProbabilities
+val modelIn = new FileInputStream("en-ner-person.bin")
+val model = new TokenNameFinderModel(modelIn)
+import opennlp.tools.namefind.TokenNameFinderModel
+val model = new TokenNameFinderModel(modelIn)
+modelIn.close
+val nameFinder = new NameFinderME(model)
+import opennlp.tools.namefind.NameFinderME
+val nameFinder = new NameFinderME(model)
+ww2
+ww2 mkString
+val ww2 = new FileInputStream("ww2sample.txt")
+def sentArray =
+for {
+sent <- sentenceDetector sentDetect (ww2 mkString)
+} yield tokenizer.tokenize(sent)
+import opennlp.toosl.dictionary._
+import opennlp.tools.dictionary._
+val sentModel = SentenceDetectorME.train("en",
+import opennlp.tools.sentdetect.SentenceSampleStream
+import opennlp.uima.sentdetect._
+import opennlp.tools.util.PlainTextByLineStream
+val sentModel = SentenceDetectorME.train("en",sampleStream, true, new Dictionary(), 5, 100)
+import opennlp.uima.sentdetect.SentenceDetecotrME
+import opennlp.uima.sentdetect.SentenceDetectorME
+import opennlp.tools.sentdetect._
+val sentModel =  = SentenceDetectorME.train("en",sampleStream, true, new Dictionary(), 5, 100)
+val sentModel  = SentenceDetectorME.train("en",sampleStream, true, new Dictionary(), 5, 100)
+val lineStream = new PlainTextByLineStream(new FileInputStream("en-sent.bin"), "UTF-8")
+val sampleStream = new SentenceSampleStream(lineStream)
+val sentModel  = SentenceDetectorME.train("en",sampleStream, true, new Dictionary(), 5, 100)
+sentenceDetector
+val sentenceDetector = new SentenceDetectorME(sentModel)
+val ww2sents = sentenceDetector.sentDetect(ww2 mkString)
+ww2
+def sentArray =
+for {
+sent <- ww2
+} yield sentenceDetector.sentDetect(sent)
+val ww2file = new scala.io.Source.fromFile("ww2sample.txt")
+val ww2file = new scala.io.BufferedSource(ww2)
+def sentArray =
+for {
+sent <- ww2file
+} yield sentenceDetector.sentDetect(sent)
+tokenizer
+for {
+sent <- ww2file{}{}{
+}}}}
+def sentArray =
+for {
+sent <- ww2file
+} yield sentenceDetector.sentDetect(tokenizer.tokenize(sent))
+def sentArray =
+for {
+sent <- ww2file.mkString
+} yield sentenceDetector.sentDetect(tokenizer.tokenize(sent))
+ww2file mkString
+val ww2file = new scala.io.BufferedSource(ww2)
+val ww2 = new FileInputStream("ww2sample.tx
+def openSample: scala.io.BufferedSource = new scala.io.BufferedSource(new FileInputStream("ww2sample.txt"))
+val ww2file = openSample
+sentenceDetector.sentDetect(tokenizer.tokenize(ww2file.mkString))
+for (sent <- ww2
+ww2file
+for (sent <- ww2file)
+sentenceDetector.sentDetect(tokenizer.tokenize(sent))
+for (sent <- ww2file.mkString)
+sentenceDetector.sentDetect(tokenizer.tokenize(sent))
+for (sent <- tokenizer.tokenize(ww2file.mkString)) sentenceDetector.sentDetect(sent)
+ww2File
+ww2file
+val ww2file = openSample
+for (sent <- tokenizer.tokenize(ww2file.mkString)) yield sentenceDetector.sentDetect(sent)
+val ww2file = openSample
+def sampleSents =
+for (sent <- tokenizer.tokenize(ww2file.mkString)) yield sentenceDetector.sentDetect(sent)
+sampleSents
+val ww2file = openSample
+def sampleSents =
+for (sent <- ww2file.mkString) yield sentenceDetector.sentDetect(sent)
+def sampleSents =
+for (sent <- toeknizer.tokenizeww2file.mkString)) yield sent
+for (sent <- toeknizer.tokenize(ww2file.mkString)) yield sent
+for (sent <- tokenizer.tokenize(ww2file.mkString)) yield sent
+val ww2file = openSample
+def ww2tokens =
+for (sent <- tokenizer.tokenize(ww2file.mkString)) yield sent
+sentenceDetector.sentDetect(ww2tokens)
+sentenceDetector.sentDetect(ww2tokens mkString)
+sentenceDetector.sentDetect(ww2tokens mkString(" "))
+val ww2file = openSample
+ww2file mkString
+val ww2file = openSample
+sentenceDetector.sentDetect(ww2file mkString)
+nameFinder
+def sents = 
+sentenceDetector.sentDetect(ww2file mkString)
+val ww2file = openSample
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString)
+ww2sents
+def named =
+for {
+sent <- ww2sents
+} yield find(sent)
+def named =
+for {
+sent <- ww2sents
+} yield nameFinder.find(sent)
+def named =
+for {
+sent <- ww2sents
+} yield nameFinder.find(sent mkString(" "))
+def named =
+for {
+sent <- ww2sents
+} yield sent
+named
+named(0)
+for (se
+ww2sents
+ww2 = openSample
+openSample
+ww2file = openSample
+ww2file
+val ww2file = openSample
+ww2file mkString
+val ww2file = openSample
+ww2file foldLeft (List()) (_ :: _)
+ww2file foldLeft (List()) {(a,b) => (a :: b)}
+ww2file foldLeft (List()) {(a:List,b) => (a :: b)}
+ww2sents
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString)
+ww2sents
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString) copyToArray
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString) copyToArray._
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString) copyToArray _
+def ww2sents = sentenceDetector.sentDetect(ww2file mkString) clone
+ww2sents
+val ww2file = openSample
+ww2sents = sentenceDetector.sentDetect(ww2file mkString)
+ww2sentArr = sentenceDetector.sentDetect(ww2file mkString)
+val ww2sentArr = sentenceDetector.sentDetect(ww2file mkString)
+ww2sentArr
+ww2sentArr length
+val nfModelIn = new java.io.FileInputStream("en-ner-person.bin")
+val nfModel = new TokenNameFinderModel(nfModelIn)
+val nameFinder = new NameFinderME(nfModel)
+nfModelIn.close
+ww2s
+for f
+f
+o
+alsdfj

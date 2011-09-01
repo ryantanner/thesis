@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\linespread{1.5}
+
+
+\title{Annotated Bibliography}
+\author{Ryan Tanner}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+
+\section*{Introduction}
+
+Most of my research this semester centered on learning the basics of the fields my thesis requires, namely natural language processing and knowledge representation.  To this end, most of these sources are not journal publications but rather reference sources and introductory texts.  Given that we do not have classes in these subjects, I spent most of my time acquiring the basic knowledge of the fields.  I have also included the tools and software packages I found useful and which may end up playing a role in my thesis.
+
+\nocite{grig07,jura00,qu08,sega09}
+
+
+\bibliographystyle{IEEEannot}
+\bibliography{annotbib}  
+
+
+\end{document}  

@@ -1,0 +1,22 @@
+val ww1tagged = io.Source.fromFile("ww1tagged.txt").mkString
+val ww1splitTags = ww1tagged.split(' ')
+var ww1Counts = Map.empty[String, Int].withDefaultValue(0)
+val ww1Tagmap = splitTags map { _.split('_') } filter { _(1) == "NNP" }
+ww1Tagmap map { word => ww1Counts = ww1Counts(word(0)) += 1 } 
+def makeWordCloud(name: String): Map[String, Int] = {     var wordCloud = Map.empty[String, Int].withDefaultValue(0)    val tagMap = io.Source.fromFile(name).mkString.split(' ') map { _.split('_') }         filter { _(1) == "NNP" }
+    tagMap map { word => wordCloud = wordCloud(word(0)) += 1 } 
+        return wordCloud
+        }
+
+        import edu.stanford.nlp.tagger.maxent.MaxentTagger
+        import java.lang.{String => JavaString}
+        val args = new Array[JavaString](4)
+        args(0) = "-model"
+        args(1) = "models/bidirectional-distsim-wsj-0-18.tagger"
+        args(2) = "-textFile" 
+        args(3) = "ww2sample.txt"
+        MaxentTagger.main(args)
+
+        env JAVA_OPTS="-mx300m" scala -classpath stanford-postagger.jar
+        taggedSentences map { _ filter { _.tag =="NNP" } } map { _ map { word => wordCloud = wordCloud(word.word()) += 1 } }
+

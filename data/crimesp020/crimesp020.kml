@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<kml>
+    <Document>
+        <Style id="09">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="28">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="22">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="36">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="35">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="32">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="23">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="02">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="25">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="26">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="01">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="06">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="21">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="48">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="49">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="46">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="47">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="08">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="45">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="42">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="29">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="40">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="41">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="05">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="24">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="56">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="13">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="27">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="20">
+<LineStyle>
+	<color>ff0000ff</color>
+	<colorMode>normal</colorMode>
+	<width>1.0</width>
+</LineStyle>
+<PolyStyle>
+	<color>ff0000ff</color>
+	<colorMode>normal</colorMode>
+	<fill>0</fill>
+	<outline>1</outline>
+</PolyStyle>
+        </Style>
+        <Style id="11">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="10">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="39">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="38">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="15">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="04">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="17">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="16">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="19">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color>ff0000ff</color>
+	<colorMode>normal</colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="54">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="31">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="30">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="51">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="50">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="53">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="34">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="33">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="55">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="37">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="18">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="12">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+        <Style id="44">
+<LineStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<width>0</width>
+</LineStyle>
+<PolyStyle>
+	<color></color>
+	<colorMode></colorMode>
+	<fill>0</fill>
+	<outline>0</outline>
+</PolyStyle>
+        </Style>
+<Placemark>
+    <name>Shape Nr. 0</name>
+    <styleUrl>#02</styleUrl>
+    <description><![CDATA[<b>STATE: </b>ak<br><b>COUNTY: </b>aleutians west census area<br><b>FIPS: </b>02016<br><b>STATE_FIPS: </b>02<br><b>STUDY_NO00: </b>3451<br><b>EDITION00: </b>1<br><b>CASE_ID00: </b>69<br><b>POP_ARR00: </b>4815<br><b>POP_CRI00: </b>4815<br><b>AG_ARR00: </b>2<br><b>AG_CRI00: </b>2<br><b>COV_IND00: </b>1.0<br><b>INDEX00: </b>90<br><b>MOD_IN00: </b>90<br><b>MURD00: </b>0<br><b>RAPE00: </b>1<br><b>ROBB00: </b>3<br><b>ASSA00: </b>35<br><b>BURG00: </b>13<br><b>LARC00: </b>32<br><b>MV_TH00: </b>6<br><b>ARSO00: </b>0<br><b>STUDY_NO99: </b>3167<br><b>EDITION99: </b>1<br><b>CASE_ID99: </b>69<br><b>POP_ARR99: </b>2600<br><b>POP_CRI99: </b>354<br><b>AG_ARR99: </b>2<br><b>AG_CRI99: </b>1<br><b>COV_IND99: </b>1.0<br><b>INDEX99: </b>12<br><b>MOD_IN99: </b>12<br><b>MURD99: </b>0<br><b>RAPE99: </b>0<br><b>ROBB99: </b>0<br><b>ASSA99: </b>2<br><b>BURG99: </b>3<br><b>LARC99: </b>7<br><b>MV_TH99: </b>0<br><b>ARSO99: </b>0<br><b>STUDY_NO98: </b>2910<br><b>EDITION98: </b>1<br><b>CASE_ID98: </b>69<br><b>POP_ARR98: </b>2768<br><b>POP_CRI98: </b>406<br><b>AG_ARR98: </b>2<br><b>AG_CRI98: </b>1<br><b>COV_IND98: </b>1.0<br><b>INDEX98: </b>29<br><b>MOD_IN98: </b>30<br><b>MURD98: </b>0<br><b>RAPE98: </b>4<br><b>ROBB98: </b>0<br><b>ASSA98: </b>4<br><b>BURG98: </b>3<br><b>LARC98: </b>17<br><b>MV_TH98: </b>1<br><b>ARSO98: </b>1<br><b>STUDY_NO97: </b>2764<br><b>EDITION97: </b>1<br><b>CASE_ID97: </b>69<br><b>POP_ARR97: </b>3097<br><b>POP_CRI97: </b>835<br><b>AG_ARR97: </b>2<br><b>AG_CRI97: </b>1<br><b>COV_IND97: </b>100.0<br><b>INDEX97: </b>28<br><b>MOD_IN97: </b>28<br><b>MURD97: </b>0<br><b>RAPE97: </b>1<br><b>ROBB97: </b>0<br><b>ASSA97: </b>8<br><b>BURG97: </b>6<br><b>LARC97: </b>10<br><b>MV_TH97: </b>3<br><b>ARSO97: </b>0<br><b>STUDY_NO96: </b>2389<br><b>EDITION96: </b>1<br><b>CASE_ID96: </b>69<br><b>POP_ARR96: </b>3088<br><b>POP_CRI96: </b>0<br><b>AG_ARR96: </b>2<br><b>AG_CRI96: </b>0<br><b>COV_IND96: </b>0.0<br><b>INDEX96: </b>0<br><b>MOD_IN96: </b>0<br><b>MURD96: </b>0<br><b>RAPE96: </b>0<br><b>ROBB96: </b>0<br><b>ASSA96: </b>0<br><b>BURG96: </b>0<br><b>LARC96: </b>0<br><b>MV_TH96: </b>0<br><b>ARSO96: </b>0<br><b>STUDY_NO95: </b>6850<br><b>EDITION95: </b>1<br><b>CASE_ID95: </b>69<br><b>POP_ARR95: </b>3073<br><b>POP_CRI95: </b>0<br><b>AG_ARR95: </b>2<br><b>AG_CRI95: </b>0<br><b>COV_IND95: </b>0.0<br><b>INDEX95: </b>0<br><b>MOD_IN95: </b>0<br><b>MURD95: </b>0<br><b>RAPE95: </b>0<br><b>ROBB95: </b>0<br><b>ASSA95: </b>0<br><b>BURG95: </b>0<br><b>LARC95: </b>0<br><b>MV_TH95: </b>0<br><b>ARSO95: </b>0<br><b>STUDY_NO94: </b>6669<br><b>EDITION94: </b>2<br><b>CASE_ID94: </b>69<br><b>POP_ARR94: </b>3971<br><b>POP_CRI94: </b>0<br><b>AG_ARR94: </b>2<br><b>AG_CRI94: </b>0<br><b>COV_IND94: </b>0.0<br><b>INDEX94: </b>0<br><b>MOD_IN94: </b>0<br><b>MURD94: </b>0<br><b>RAPE94: </b>0<br><b>ROBB94: </b>0<br><b>ASSA94: </b>0<br><b>BURG94: </b>0<br><b>LARC94: </b>0<br><b>MV_TH94: </b>0<br><b>ARSO94: </b>0<br><b>MURDPP00: </b>0.0<br><b>RAPEPP00: </b>0.021<br><b>ROBBPP00: </b>0.062<br><b>ASSAPP00: </b>0.727<br><b>BURGPP00: </b>0.27<br><b>LARCPP00: </b>0.665<br><b>MVTHPP00: </b>0.125<br><b>ARSOPP00: </b>0.0<br><b>MURDPP99: </b>0.0<br><b>RAPEPP99: </b>0.0<br><b>ROBBPP99: </b>0.0<br><b>ASSAPP99: </b>0.565<br><b>BURGPP99: </b>0.847<br><b>LARCPP99: </b>1.977<br><b>MVTHPP99: </b>0.0<br><b>ARSOPP99: </b>0.282<br><b>MURDPP98: </b>0.0<br><b>RAPEPP98: </b>0.985<br><b>ROBBPP98: </b>0.0<br><b>ASSAPP98: </b>0.985<br><b>BURGPP98: </b>0.739<br><b>LARCPP98: </b>4.187<br><b>MVTHPP98: </b>0.246<br><b>ARSOPP98: </b>0.246<br><b>MURDPP97: </b>0.0<br><b>RAPEPP97: </b>0.12<br><b>ROBBPP97: </b>0.0<br><b>ASSAPP97: </b>0.958<br><b>BURGPP97: </b>0.719<br><b>LARCPP97: </b>1.198<br><b>MVTHPP97: </b>0.359<br><b>ARSOPP97: </b>0.0<br><b>MURDPP96: </b>-9999.0<br><b>RAPEPP96: </b>-9999.0<br><b>ROBBPP96: </b>-9999.0<br><b>ASSAPP96: </b>-9999.0<br><b>BURGPP96: </b>-9999.0<br><b>LARCPP96: </b>-9999.0<br><b>MVTHPP96: </b>-9999.0<br><b>ARSOPP96: </b>-9999.0<br><b>MURDPP95: </b>-9999.0<br><b>RAPEPP95: </b>-9999.0<br><b>ROBBPP95: </b>-9999.0<br><b>ASSAPP95: </b>-9999.0<br><b>BURGPP95: </b>-9999.0<br><b>LARCPP95: </b>-9999.0<br><b>MVTHPP95: </b>-9999.0<br><b>ARSOPP95: </b>-9999.0<br><b>MURDPP94: </b>-9999.0<br><b>RAPEPP94: </b>-9999.0<br><b>ROBBPP94: </b>-9999.0<br><b>ASSAPP94: </b>-9999.0<br><b>BURGPP94: </b>-9999.0<br><b>LARCPP94: </b>-9999.0<br><b>MVTHPP94: </b>-9999.0<br><b>ARSOPP94: </b>-9999.0<br>]]>
+    </description>
+    <Polygon>
+        <extrude>0</extrude>
+        <tessellate>1</tessellate>

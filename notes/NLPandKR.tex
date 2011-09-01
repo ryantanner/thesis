@@ -1,0 +1,272 @@
+\documentclass[11pt]{article}
+
+\usepackage{geometry}
+\geometry{letterpaper}
+
+\title{Natural Langauge Processing and Knowledge Representation}
+\author{Lucja M. Iwanska and Stuart C. Shapiro}
+
+\usepackage{amsmath}
+
+\newcommand{\infer}{\quad \leftrightarrow \quad}
+
+\begin{document}
+
+\maketitle
+
+\section{Natural Language is a Powerful Knowledge Representation System: The UNO Model}
+
+Conjecture: Natural language as a knowledge representation system. This model is fully implemented and can handle a corpora of thousands of documents.
+
+\begin{description}
+\item[Expressive and computationally tractable] NL has a rich structure of complex boolean expressions (negation, conjuction, disjuction, adjectival/adverbial modification).  This structure lends itself to easily-computable inferences.  Close relationship between syntax and structure.
+\item[General purpose] Uniformity of representation and reasoning.
+\item[Logical contradiction and logical redundancy] Serve to identify knowledge gaps and convey nonliteral meanings.
+\item[Context dependency] Reflects process of knowledge acquisition.
+\item[Facilitates machine learning] Provides an expressive mechanism for formalization and easily parsable constructions to convey taxonomic language.
+\item[Mixes object- and meta-level descriptions] Same representational and inferential mechanism to draw inferences about the environment (object) and to reason about its own knowledge (meta).  Drawback: paradoxes.
+\end{description}
+
+\subsection{Conjecture Validation}
+
+Balancing theoretical research with practical implementation involving shortcuts and hacks.
+
+Can anything be proven about natural language?
+
+\subsubsection{Representational and Inferential Strengths and Weaknesses}
+
+NL can be viewed as a formal representational language, more than just an interface.
+
+The representation of language does not have to mean a non-natural data scheme.  By representing language as language, we can build a system the handles the meaning of langauge.
+
+Knowledge representation schemes not developed explicitly for the purposes of understanding natural language tend to be very removed from the language.  This leads to weak and \emph{wrong} representations.  Formal systems tend to be built for artificial data rather than real-world corpora.  However, being different from NL does not have to mean worse, as this distance can reveal weaknesses in the representational abilities of NL itself, constituting a representational alternative.  That said, only narror, specialized representation systems present this possibility.  Formal systems do not currently approach a general-purpose capability.
+
+\subsubsection{UNO Model of Natural Language}
+
+UNO offers a solid computational and mathematical framework intact with linguistic theories. The model constantly updates its knowledge base \emph{and} automates inferencing by the same semantically clean computational mechanism of performing boolean operations on the representation of natural langauge input and the representation within the knowledge base (existing knowledge).  UNO closesly mimics the structure and capabilities of natural language, which allows UNO to build a knowledge base from an existing corpora of text.
+
+NLP as Knowledge Acquisition. View natural language as speaker/hearer-based, rather than solely speaker (taking context of existing knowledge of the hearer into account). Could be crucial in biulding the knowledge graph.  
+
+"Pure" Meaning in Natural Language: A sentence that any native speaker could understand without any external knowledge.  Sources of universally shared knowledge are the semantics, mathematics and computability of: 1) generalized quantifiers, 2) adjectival/adverbial modification, 3) boolean modification, 4) underspecificity of lexically simple scalars.
+
+\subsubsection{Research Motivation behing this Model}
+
+Theory: Show the computational aspects of natural language. Engineering: Demonstrate that this solution scales up and works on large, real-life corpora.  
+
+Formal Theories and Implementation: Provide a complete framework for computing literal meanigns of natural langauge and account for nonliteral meaning.
+
+\begin{itemize}
+\item A general semantic model of negation in natural language. Involves representation and inference for sentences and tiny texts involving explicit negation at different syntactic levels and accounting for the complexity between negation, conjuction, disjunction, quantifiers, adjectival/adverbial modification and scalar expressions.
+\item Temporal logic: reasoning about relative and absolute time in natural language. First done on newspaper articles.
+\item Semantics, pragmatics and context of intensional negative adjectives. Infer meaning of sentences modified by adjectives like ``alleged'' and ``toy.''
+\end{itemize}
+
+Engineering solutions: ``Weak'' methods.  Problems:
+
+\begin{itemize}
+\item Automated processing of narratives written by grade students. Involves preferential sentence-level parsing and extracting prepositional phrases.
+\item Discourse processing. Computing structures with nonlinearly distributed knowledge. 
+\item Extraction of names, numbers, locations, dates, etc. from a large volume of newspaper articles.
+\end{itemize}
+
+\subsubsection{Technical Aspects of UNO}
+
+\begin{itemize}
+\item Sentences asserting properties ("John is neither a good nor hard-working nurse") are represented by the following equation: \\ $type == \{<P_{1}, TP_{1}>, <P_{2}, TP_{2}>, \dots, <P_{n}, TP_{n}>\}$
+where $type$ is the UNO representation of a noun phrase or name of concept, $P$ is a property value, and $TP$ is a set $<t, p>$ such that property $P$ holds at temporal interval $t$ with the probability $p$.   Both $t$ and $p$ are UNO representations of natural language expressions that describe temporal and probabilistic information.
+\item UNO uses its knowledge base bi-directionally for both answering questions about the properties of a particular entity and matching given properties against the properties of a known entity or concept
+\end{itemize}
+
+(When building a knowledge graph, how do I avoid redundancy? Make sure the retrieval system is robust/flexible enough to prevent redundant vertices, leading to lower-than-expected context scores)
+
+Underspecified terms: building blocks of UNO representations.  NL is very underspecified---reliance on context is crucial.  In parallel, UNO models are also underspecified, allowing context to be taken into account from the knowledge base.  If a sentence lacks temporal or probablistic information, the model will equivalently lack such information.
+
+If a property holds for a single temporal interval or a set of intervals which can be described via a single temporal expression, the set notation can be flattened to $<P, t, p>$.  
+
+Building blocks of UNO: sets $[a_1,a_2,\dots,a_n]$ whose elements $a_i$ are terms.  These terms are record- and graph-like structures consisting of two elements: 1) a \emph{head} (type) and 2) a \emph{body}, a list of attribute-value pairs $attribute=>value$ where attributes are symbols and values are sets of $|n>0|$.  Example:
+$[ woman (health \to sick,
+           happy \to (\neg happy)(degree \to very))]$
+
+Semantically, these types are all subtypes of the type $noun$.
+
+Boolean Operations for Computing Semantic Relations: Union, intersection and negation.  Results using these operators are guaranteed to hold as boolean algebra set-theoretics have been formally proven.  These operators take terms as heir input and compute the resulting complementary, conjunctive and disjunctive terms with the set-complement, set-intersection and set-union semantics.  These limited operators allow UN to compute a number of semantic relationships:
+
+\begin{itemize}
+\item Entailment (and subsumption) reflecting set-inclusion
+\item Partial overlap reflecting nonempty set-intersection
+\item Disjointness reflecting empty set-intersection
+\end{itemize}
+
+These relationships provide:
+
+\begin{itemize}
+\item Computing consequences of knowledge expresed in natural language, allowing for the computatation of answers to queries of the knowledge base
+\item Updating the system's knowledge base
+\item Identifying knowledge gaps
+\end{itemize}
+
+Simple sentences are represented in the knowledge base in the form of $NP == \{P_1,\dots,P_2\}$ where $NP$ is the representation of a proper noun, a disjunction of noun phrases or a quantified noun phrase, $P_i$ are terms representing properties that the denotation of $NP$ is known to possess.
+
+\subsubsection{Inference}
+
+``NP-stronger than or equal to''
+
+Let $S_1 = NP_1$, $Verb_1$ be a sentence, $NP_1$ and $NP_2$ be boolean combinations of proper nouns such that $T(NP_1)$ and $T(NP_2)$ are their UNO representations or quantified noun phrases such that $NP_i = Det_i, Noun_i$ such that $T(Det_i)$ and $T(Noun_i)$ are terms representing $Det_i$ and $Noun_i$ respectively.  Then \ldots
+
+\begin{enumerate}
+\item $NP_1$ is left monotone increasing and \\
+    a. for proper nouns, $T(NP_1) \sqsubseteq T(NP_2)$ \\
+    b. for quantified noun phrases, $T(Det_1) \sqsubseteq T(Det_2)$ and $T(Noun_1) \sqsubseteq T(Noun_2)$
+\item $NP_1$ is left monotone decreasing, and \\
+    a. for proper nouns, $T(NP_2) \sqsubseteq T(NP_1)$ \\
+    b. for quantified noun phrases, $T(Det_2) \sqsubseteq T(Det_1)$ and $T(Noun_1) \sqsubseteq T(Noun_2)$
+\end{enumerate}
+
+See algorithm for updating knowledge base, page 21.
+
+UNO currently ignores contradictions---how to improve?
+
+See also: 
+
+Iwanska: A General Semantic Model of Negation in Natural Language: Representation and Inference. In Proceedings of the Third International Conference on Principles of Knowledge Representation and Reasoning (KR92), 357-368. 1992.
+
+Logical Reasoning in Natural Language: It is All About Knowledge. Minds and Machines 3(4): 475-510.
+
+\subsection{Large Scale Implementation}
+
+See page 25, architecture diagram.
+
+Simple, flexible nonsequential architecture of the NLP system:
+
+\begin{itemize}
+\item Uniform representation for all---All system modules access the knowledge representation module and share its uniform representation
+\item No external specialists---All parsing and knowledge comprehension is handled internally
+\item No interfaces translating between incompatible representations, due to item 2.
+\end{itemize}
+
+\section{Natural Language for Representing and Reasoning about Sets}
+
+\subsection{Basic Sets: Lexically Simple Common Nouns, Verbs, Adjectives}
+
+Words in these categories can be thought of as denoting real entities (persons, objects, etc.). Represented as singleton terms whose elements are only primitive types.
+
+\subsection{Subsets (Subtypes): Adjectival and Adverbial Modification}
+
+NL provides a generative mechanism to refer to arbitrary subsets of the basic sets.  Adjectives and adverbs combine with common nouns, verbs and adjectives to produce complex expressions extensionally denoting subsets corresponding to the lexically simpler expressions.
+
+\emph{Happy woman} refers to a subset of the entities denoted as \emph{woman}.  \emph{Very happy woman} is a subset of that.
+
+Sentences (syntactic structures) entail multiples sets.  \emph{Sam is a very happy woman} entails \emph{Sam is a woman} and \emph{Sam is a happy woman}.
+
+In UNO, modifications are represnted as primitives with modifiers, eg. $T_4 = [ woman(happy \Rightarrow happy) ]$
+
+\emph{Very happy woman} is represented as $[ woman(happy \Rightarrow happy(degree \Rightarrow very)) ]$
+
+The operator $\sqcup$ preserves the subtyping relation that corresponds to the original English expression, ensuring that the elements of the set denoted as \emph{happy woman} are also in the set \emph{woman}.
+
+\subsection{Set-Intersection, -Union, -Complement}
+
+\subsubsection{Conjunction}
+
+\emph{Professor and mother}: a set denoted by the conjuction of the sets \emph{professor} and \emph{mother}.  We can infer from ``Sam is a professor and mother'' that Sam is a mother.
+
+\subsubsection{Negation}
+
+``Sam is not a woman'' entails ``Sam is not a very happy woman'' because \emph{not woman} entails \emph{not very happy woman}.
+
+\subsubsection{Disjunction}
+
+``It must have been a dog'' entails ``It must have been a dog or large cat.''
+
+\subsubsection{UNO model}
+
+Representation is compositionally derived via boolean operations.
+
+\subsubsection{Arbitrary Sets}
+
+Examples: ``Very, but not extremely, good candy.'' ``Neither good nor hard working nurse.'' ``Neither short nor very tall.''
+
+Semantic relations are guaranteed to hold.
+
+\subsubsection{Flat, context-dependent hierarchies}
+
+UNO mimicks the set-based characteristics of natural langauge.  On-the-fly computation eliminates the need to store these relations in the system's knowledge base.
+
+\subsection{Natural Language for Reasoning about Intervals---Scalars}
+
+Scalars are natural language expressions that denote quantitative values.  Lexically simple scalars denote intervals and ordered sets of real numbers.
+
+Scalar boolean operations are realized by the words not, and and or.  These are polymorphic, multi-type loaded operations.  
+
+Determiners can entail other determiners (``sometimes'' entails ``always'').  Similarly, \emph{stupid} entails {not extremely bright}.  The meaning of scalars can represent incomplete knowledge: \emph{Some swans are white} should not preclude \emph{all swans are white}.  Knowing that something is possible is not inconsistent with a possibility that this something is in fact certain.
+
+\subsubsection{UNO Model and Interval Reasoning}
+
+UNO models scalars as faimlies of computable Boolean algebras.  Uses the lowest boundary of a qualitative scalar (some $>=0$).  \emph{Some} is the interval $(0,+1]$.  
+
+\subsection{Representing and Reasoning about Time}
+
+Very similar to other reasonings already explored.  Many general-purpose scalars can describe time.  Entailment between pairs: $<$\emph{a very good time}, \emph{not a bad time}$>$.  Scalars such as \emph{similar}, \emph{same} and \emph{different} allow one to experss the degree of similarity between entities.  Understanding logical implications of sentences in which the similarity words describe temporal information is exactly analogous. These inferences require no information about the actual times events take place.  
+
+\subsection{Spatial Reasoning}
+
+Natural language is not good for spatial reasoning in general.  However, a large class of space-related inferences can be accomplished with the NL-inherent representational and inferential machinery.  Requires an extensive geographical knowledge base, specifically for region containment.  
+\subsection{Underspecificity and Context Dependency}
+
+A computational theory of general context-dependency of natural language.
+
+\subsubsection{Top-Down and Bottom-Up Theory Evolution}
+
+Top-down theory evolution consists of investigating possible interpretations of NL utterances in different contexts and their relation to literal meaning.  Bottom-up evolution regards four specific problems:
+
+\begin{description}
+\item[Intensional negative adjectivals] Alleged, artifcial, fake, false, former, toy.  Semantics, pragmatics and context-dependency of these adjectives.
+\item[Large textual corpora] Computing discourse structure via heuristics-based definite anaphora resolution, handling abbreviatons, explinting local context (puncutation).
+\item[Reducing underpecificity of negation]
+\item[Computing context-dependent inference]
+\end{description}
+
+Goal: converge top-down and bottom-up theory.  Inherent context-dependency results in: increased information content, simplified, less precise inference.  The tension between the needs for expressiveness, constraints on human communication and limits of NL; in this view, context-dependency is a solution, not a problem.  Context reduces inherent underspecificity. Negative contexts change knowledge (contradictory interpretations) while positive context does not (logically stronger interpretations/more knowledge).  
+
+Most underspecificity can be easily computed.  However, a full-scale implementation is not realistic.  
+
+Do I need context for this project?
+
+
+
+
+
+\section{Uniform Natural Language Spatio-Temporal Logic---Reasoning about Absolute and Relative Space and Time}
+
+(Applying UNO to Spatio-Temporal Natural Language)
+
+\subsection{Uniform Approach to Handling Many Types of Knowledge}
+
+NLP systems are the only reasonable solution to building a general-purpose knowledge representation system. Takes advantage of the logic underlying natural language.
+
+The UNO model can accomplish spatio-temporal reasoning over a large scale without parsing at a sentential level.
+
+Can I find a way to parse a corpora of text without manual tagging?
+
+\subsubsection{The Computational Nature of Natural Language}
+Open questions in NLP:
+\begin{itemize}
+\item Is natural language algorithmic?
+\item Can it be considered a formal langauge?  If so, what is its computational complexity?
+\item What is the relation between a representation of the meaning of natural langauge utterances and the semantics of a representational langauge capturing general human knowledge?
+\end{itemize}
+
+Proposed answers:
+\begin{itemize}
+\item Yes
+\item Yes, and it appears to be quite tractable
+\item They should be the same
+\end{itemize}
+
+\subsection{Spatio-Temporal Reasoner}
+
+
+
+
+\end{document}
+
