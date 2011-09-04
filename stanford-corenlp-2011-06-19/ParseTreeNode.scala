@@ -1,8 +1,12 @@
+import scala.xml._
+
 abstract class Sentence {
 
 	val tokens: List[Token]
 	val dependencies: List[Dependency]
 	val parseTree: ParseTreeNode // holds parent
+	
+	override def toString = tokens + "\n" + dependencies + "\n" + ParseTreeNode.print(parseTree)
 	
 	abstract class Token	{
 	
@@ -64,28 +68,29 @@ abstract class Sentence {
 	
 	}
 
-	class ParseTreeNode(par: ParseTreeNode, w: Token, p: String, i: Int)   {
+	class ParseTreeNode(par: ParseTreeNode, w: Token, p: String)   {
 	
 	  val parent: ParseTreeNode = par
 	  //var word:String = w
 	  var pos:String = p
 	  var word:Token = w
 	  var childs:List[ParseTreeNode] = scala.collection.immutable.List()
-	  var index:Int = i
+	  //var index:Int = i
 	  var relations: List[Dependency] = List[Dependency]()
 	
-	  override def toString = word + "(" + index + ")" + "/" + pos + " " + childs.length + " children"
+	  override def toString = if (word == null) "(" + pos + " " + childs.length + " children"
+	  						  else word + " (" + word.id + ") / " + pos
 	
 	  def this(p: String) = {
-		this(null,null,p,-1)
+		this(null,null,p)
 	  }
 	
 	  def this() = {
-		this(null,null,"",-1)
+		this(null,null,"")
 	  }
 	
 	  def this(par: ParseTreeNode) = {
-		this(par,null,"",-1)
+		this(par,null,"")
 	  }
 	
 	  def :+(ptn: ParseTreeNode): ParseTreeNode = {
@@ -95,37 +100,28 @@ abstract class Sentence {
 	  }
 	
 	  def :+(par:ParseTreeNode, nw: Token, np: String): ParseTreeNode = {
-		childs = childs :+ new ParseTreeNode(par,nw,np,-1)
+		childs = childs :+ new ParseTreeNode(par,nw,np)
 		return this
 	  }
 	  
-	  def :+(par:ParseTreeNode, nw: Token, np: String, ni: Int): ParseTreeNode = {
-		childs = childs :+ new ParseTreeNode(par,nw,np,ni)
-		return this
-	  }
-	
 	  def +:(ptn: ParseTreeNode) {
 		childs = ptn +: childs
 	  }
 	
 	  def +:(par:ParseTreeNode, nw: Token, np: String) {
-		childs = (new ParseTreeNode(par,nw,np,-1)) +: childs
+		childs = (new ParseTreeNode(par,nw,np)) +: childs
 	  }
-	
-	  def +:(par:ParseTreeNode, nw: Token, np: String, ni: Int) {
-		childs = (new ParseTreeNode(par,nw,np,ni)) +: childs
-	  }
-	
 	
 	}
 	
 	object ParseTreeNode	{
 		
 		def parse(parseString: String): ParseTreeNode = {
-			return pt_i(new ParseTreeNode, parseString.split(" ").toList,0)	
+			return parser(new ParseTreeNode, parseString.split(" ").toList,tokens)	
 		}
 		
-		// with index
+/*
+ with index
 		private def pt_i(node: ParseTreeNode, elems:List[String], i:Int): ParseTreeNode = elems match {
 			case List() => node
 			case w :: rest => if ('(' == w.head) {
@@ -141,6 +137,25 @@ abstract class Sentence {
 					for (i <- 1 to (w count { c => if (c == ')') true else false }))
 						n = n.parent
 					return pt_i(n,rest,i+1)
+				}
+		}
+*/
+
+		
+		def parser(node: ParseTreeNode, elems:List[String], tokens:List[Token]): ParseTreeNode = elems match {
+			case List() => node
+			case w :: rest => if ('(' == w.head) {
+					val child = new ParseTreeNode(node)
+					node :+ child
+					child.pos = w slice (1,w.length)
+					return parser(child,rest,tokens)
+				}
+				else {
+					node.word = tokens.head
+					var n = node
+					for (i <- 1 to (w count { c => if (c == ')') true else false }))
+						n = n.parent
+					return parser(n,rest,tokens tail)
 				}
 		}
 		
@@ -173,7 +188,7 @@ object Sentence	{
 	val dependencies: List[Dependency] = (List[Dependency]() /: depNode) (_ :+ Dependency.fromXML(_))
 */
 	
-	def fromXML(node: scala.xml.Node): Sentence =
+	def fromXML(node: Node): Sentence =
 		new Sentence {
 			val tokens = (List[Token]() /: (node \\ "token")) (_ :+ Token.fromXML(_))
 			val dependencies = (List[Dependency]() /: (node \\ "basic-dependencies" \\ "dep")) (_ :+ Dependency.fromXML(_))
