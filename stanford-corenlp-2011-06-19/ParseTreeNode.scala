@@ -52,24 +52,20 @@ abstract class Sentence {
 		val gov: Token 
 		val dep: Token 
 		val relType: String // dependency relation/type
-		val relFunc: (ParseTreeNode,ParseTreeNode) => ParseTreeNode
+		val relFunc: Relations.dep
 		
 		override def toString = "(" + gov + " > " + dep + " / " + relType + ")"
 	
 	}
 
-	object Dependency	{
-	
-		
-		
+	object Dependency	{		
 		def fromXML(node: scala.xml.Node): Dependency =
 			new Dependency	{
 				val gov = tokens((node \ "governor" \ "@idx").text.toInt - 1)
 				val dep = tokens((node \ "dependent" \ "@idx").text.toInt - 1)
 				val relType = (node \ "@type") text
-				val relFunc = Relations.handler(relType) 
+				val relFunc = Relations.handler(relType)
 			}
-	
 	}
 
 	class ParseTreeNode(par: ParseTreeNode, w: Token, p: String)   {
@@ -184,321 +180,426 @@ abstract class Sentence {
 	}
 	
 	object Relations	{
-		def abbrev(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("abbrev")
-			
-			return null
+		class dep extends Function2[ParseTreeNode, ParseTreeNode, List[Property]]	{
+			// Most basic dependency, all others inherit from this
+			def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
+				println("dep")
+				return null
+			}
+		}
+
+		class abbrev extends dep	{
+			override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
+				println("abbrev")
+				return null	
+			}
 		}
 		
-		def acomp(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("acomp")
-			return null
+		class acomp extends dep	{ 
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("acomp")
+				return null
+			}
 		}
 		
-		def advcl(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("advcl")
-			return null
+		class advcl extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("advcl")
+				return null
+			}
 		}
 		
-		def advmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("advmod")
-			return null
+		class advmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("advmod")
+				return null
+			}
 		}
 		
-		def agent(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("agent")
-			return null
+		class agent extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("agent")
+				return null
+			}
 		}
 		
-		def amod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("amod")
-			return null
+		class amod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				
+				println("amod")
+				return null
+			}
 		}
 		
-		def appos(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("appos")
-			return null
+		class appos extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("appos")
+				return null
+			}
 		}
 		
-		def attr(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("attr")
-			return null
+		class attr extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("attr")
+				return null
+			}
 		}
 		
-		def aux(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("aux")
-			return null
+		class aux extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("aux")
+				return null
+			}
 		}
 		
-		def auxpass(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("auxpass")
-			return null
+		class auxpass extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("auxpass")
+				return null
+			}
 		}
 		
-		def cc(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("cc")
-			return null
+		class cc extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("cc")
+				return null
+			}
 		}
 		
-		def ccomp(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("ccomp")
-			return null
+		class ccomp extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("ccomp")
+				return null
+			}
 		}
 		
-		def complm(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("complm")
-			return null
+		class complm extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("complm")
+				return null
+			}
 		}
 		
-		def conj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("conj")
-			return null
+		class conj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("conj")
+				return null
+			}
 		}
 		
-		def cop(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("cop")
-			return null
+		class cop extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("cop")
+				return null
+			}
 		}
 		
-		def csubj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("csubj")
-			return null
+		class csubj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("csubj")
+				return null
+			}
 		}
 		
-		def csubjpass(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("csubjpass")
-			return null
+		class csubjpass extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("csubjpass")
+				return null
+			}
 		}
 		
-		def dep(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("dep")
-			return null
+		class det extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("det")
+				return null
+			}
 		}
 		
-		def det(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("det")
-			return null
+		class dobj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("dobj")
+				return null
+			}
 		}
 		
-		def dobj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("dobj")
-			return null
+		class expl extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("expl")
+				return null
+			}
 		}
 		
-		def expl(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("expl")
-			return null
+		class infmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("infmod")
+				return null
+			}
 		}
 		
-		def infmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("infmod")
-			return null
+		class iobj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("iobj")
+				return null
+			}
 		}
 		
-		def iobj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("iobj")
-			return null
+		class mark extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("mark")
+				return null
+			}
 		}
 		
-		def mark(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("mark")
-			return null
+		class mwe extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("mwe")
+				return null
+			}
 		}
 		
-		def mwe(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("mwe")
-			return null
+		class neg extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("neg")
+				return null
+			}
 		}
 		
-		def neg(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("neg")
-			return null
+		class nn extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("nn")
+				return null
+			}
 		}
 		
-		def nn(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("nn")
-			return null
+		class npadvmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("npadvmod")
+				return null
+			}
 		}
 		
-		def npadvmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("npadvmod")
-			return null
+		class nsubj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("nsubj")
+				return null
+			}
 		}
 		
-		def nsubj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("nsubj")
-			return null
+		class nsubjpass extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("nsubjpass")
+				return null
+			}
 		}
 		
-		def nsubjpass(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("nsubjpass")
-			return null
+		class num extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("num")
+				return null
+			}
 		}
 		
-		def num(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("num")
-			return null
+		class number extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("number")
+				return null
+			}
 		}
 		
-		def number(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("number")
-			return null
+		class parataxis extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("parataxis")
+				return null
+			}
 		}
 		
-		def parataxis(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("parataxis")
-			return null
+		class partmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("partmod")
+				return null
+			}
 		}
 		
-		def partmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("partmod")
-			return null
+		class pcomp extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("pcomp")
+				return null
+			}
 		}
 		
-		def pcomp(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("pcomp")
-			return null
+		class pobj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("pobj")
+				return null
+			}
 		}
 		
-		def pobj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("pobj")
-			return null
+		class poss extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("poss")
+				return null
+			}
 		}
 		
-		def poss(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("poss")
-			return null
+		class possessive extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("possessive")
+				return null
+			}
 		}
 		
-		def possessive(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("possessive")
-			return null
+		class preconj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("preconj")
+				return null
+			}
 		}
 		
-		def preconj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("preconj")
-			return null
+		class predet extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("predet")
+				return null
+			}
 		}
 		
-		def predet(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("predet")
-			return null
+		class prep extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("prep")
+				return null
+			}
 		}
 		
-		def prep(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("prep")
-			return null
+		class prepc extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("prepc")
+				return null
+			}
 		}
 		
-		def prepc(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("prepc")
-			return null
+		class prt extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("prt")
+				return null
+			}
 		}
 		
-		def prt(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("prt")
-			return null
+		class punct extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("punct")
+				return null
+			}
 		}
 		
-		def punct(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("punct")
-			return null
+		class purpcl extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("purpcl")
+				return null
+			}
 		}
 		
-		def purpcl(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("purpcl")
-			return null
+		class quantmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("quantmod")
+				return null
+			}
 		}
 		
-		def quantmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("quantmod")
-			return null
+		class rcmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("rcmod")
+				return null
+			}
 		}
 		
-		def rcmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("rcmod")
-			return null
+		class ref extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("ref")
+				return null
+			}
 		}
 		
-		def ref(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("ref")
-			return null
+		class rel extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("rel")
+				return null
+			}
 		}
 		
-		def rel(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("rel")
-			return null
+		class tmod extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("tmod")
+				return null
+			}
 		}
 		
-		def tmod(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("tmod")
-			return null
+		class xcomp extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("xcomp")
+				return null
+			}
 		}
 		
-		def xcomp(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("xcomp")
-			return null
+		class xsubj extends dep	{
+			override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+				println("xsubj")
+				return null
+			}
 		}
 		
-		def xsubj(gov: ParseTreeNode, dep:ParseTreeNode): ParseTreeNode = {
-			println("xsubj")
-			return null
-		}
-		
-		def handler(relType: String): (ParseTreeNode,ParseTreeNode) => ParseTreeNode = relType match  {
-			case "abbrev" 		=> return abbrev
-			case "acomp"  		=> return acomp
-			case "advcl"		=> return advcl
-			case "advmod"		=> return advmod
-			case "agent"		=> return agent
-			case "amod"			=> return amod
-			case "appos"		=> return appos
-			case "attr"			=> return attr
-			case "aux"			=> return aux
-			case "auxpass"		=> return auxpass
-			case "cc"			=> return cc
-			case "ccomp"		=> return ccomp
-			case "complm"		=> return complm
-			case "conj"			=> return conj
-			case "cop"			=> return cop
-			case "csubj"		=> return csubj
-			case "csubjpass"	=> return csubjpass
-			case "dep"			=> return dep
-			case "det"			=> return det
-			case "dobj"			=> return dobj
-			case "expl"			=> return expl
-			case "infmod"		=> return infmod
-			case "iobj"			=> return iobj
-			case "mark"			=> return mark
-			case "mwe"			=> return mwe
-			case "neg"			=> return neg
-			case "nn"			=> return nn
-			case "npadvmod"		=> return npadvmod
-			case "nsubj"		=> return nsubj
-			case "nsubjpass"	=> return nsubjpass
-			case "num"			=> return num
-			case "number"		=> return number
-			case "parataxis"	=> return parataxis
-			case "partmod"		=> return partmod
-			case "pcomp"		=> return pcomp
-			case "pobj"			=> return pobj
-			case "poss"			=> return poss
-			case "possessive"	=> return possessive
-			case "preconj"		=> return preconj
-			case "predet"		=> return predet
-			case "prep"			=> return prep
-			case "prepc"		=> return prepc
-			case "prt"			=> return prt
-			case "punct"		=> return punct
-			case "purpcl"		=> return purpcl
-			case "quantmod"		=> return quantmod
-			case "rcmod"		=> return rcmod
-			case "ref"			=> return ref
-			case "rel"			=> return rel
-			case "tmod"			=> return tmod
-			case "xcomp"		=> return xcomp
-			case "xsubj"		=> return xsubj
-			case _				=> return dep
+		def handler(relType: String): dep = relType match  {
+			case "abbrev" 		=> return new abbrev
+			case "acomp"  		=> return new acomp
+			case "advcl"		=> return new advcl
+			case "advmod"		=> return new advmod
+			case "agent"		=> return new agent
+			case "amod"			=> return new amod
+			case "appos"		=> return new appos
+			case "attr"			=> return new attr
+			case "aux"			=> return new aux
+			case "auxpass"		=> return new auxpass
+			case "cc"			=> return new cc
+			case "ccomp"		=> return new ccomp
+			case "complm"		=> return new complm
+			case "conj"			=> return new conj
+			case "cop"			=> return new cop
+			case "csubj"		=> return new csubj
+			case "csubjpass"	=> return new csubjpass
+			case "dep"			=> return new dep
+			case "det"			=> return new det
+			case "dobj"			=> return new dobj
+			case "expl"			=> return new expl
+			case "infmod"		=> return new infmod
+			case "iobj"			=> return new iobj
+			case "mark"			=> return new mark
+			case "mwe"			=> return new mwe
+			case "neg"			=> return new neg
+			case "nn"			=> return new nn
+			case "npadvmod"		=> return new npadvmod
+			case "nsubj"		=> return new nsubj
+			case "nsubjpass"	=> return new nsubjpass
+			case "num"			=> return new num
+			case "number"		=> return new number
+			case "parataxis"	=> return new parataxis
+			case "partmod"		=> return new partmod
+			case "pcomp"		=> return new pcomp
+			case "pobj"			=> return new pobj
+			case "poss"			=> return new poss
+			case "possessive"	=> return new possessive
+			case "preconj"		=> return new preconj
+			case "predet"		=> return new predet
+			case "prep"			=> return new prep
+			case "prepc"		=> return new prepc
+			case "prt"			=> return new prt
+			case "punct"		=> return new punct
+			case "purpcl"		=> return new purpcl
+			case "quantmod"		=> return new quantmod
+			case "rcmod"		=> return new rcmod
+			case "ref"			=> return new ref
+			case "rel"			=> return new rel
+			case "tmod"			=> return new tmod
+			case "xcomp"		=> return new xcomp
+			case "xsubj"		=> return new xsubj
+			case _				=> return new dep
 		}
 	
 	}
@@ -517,7 +618,7 @@ object Sentence	{
 	def fromXML(node: Node): Sentence =
 		new Sentence {
 			val tokens = (List[Token]() /: (node \\ "token")) (_ :+ Token.fromXML(_))
-			val dependencies = 	(Map[String,List[Dependency]]() /: depNode) (
+			val dependencies = 	(Map[String,List[Dependency]]() /: (node \\ "basic-dependencies" \\ "dep")) (
 				(map:Map[String,List[Dependency]],dep:Node) => { map + (((dep \ "governor" \ "@idx").text) -> 																			(map.getOrElse(((dep \ "governor" \ "@idx").text),List()) 
 											++ List(Dependency.fromXML(dep))))})
 			val parseTree = ParseTreeNode.parse(node \\ "parse" text)
