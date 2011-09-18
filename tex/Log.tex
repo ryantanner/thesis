@@ -1,0 +1,29 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\linespread{1.5}
+
+\usepackage{natbib}
+
+\title{Thesis Log}
+\author{Ryan Tanner}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\section{\date{Friday, Feb 18}}
+
+Downloading wikipedia dump.  About to test mwdumper.  Parsing...  Not the fastest.  One error so far: \verb|ERROR 1146 (42S02) at line 33: Table 'WIKIPEDIA.text' doesn't exist|
+
+1000 pages, 2.461/sec.  Should be about 42 hours.
+
+
+\end{document}  

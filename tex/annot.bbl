@@ -1,0 +1,89 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{Feiner93}
+S.~Feiner, B.~MacIntyre, M.~Haupt, and E.~Solomon, ``Windows on the world: {2D}
+  windows for {3D} augmented reality,'' in \emph{Proc. UIST'93}, 1993, pp.
+  145--155.
+ \begin{quotation}\noindent In this paper, the authors describe different means
+  of using a 2D windowing techniques to implement 3D windows in an IVE. Menus
+  (windows) are classified into three categories based on their association
+  with the IVE. (1) The \emph{world?fixed} menu is a set of menus that will
+  always appear in the same exact position in the IVE. (2) \emph{Object-fixed}
+  menus are those that are associate with only one single object in the world.
+  (3) The last category is the \emph{view-fixed} menu which will always appear
+  in the same position relative to the current user view. This menu
+  classification provides a new perspective to the CHI problem in an IVE.
+  \end{quotation}
+
+\bibitem{Brook99}
+F.~P.~B. Jr., ``What's real about virtual reality,'' \emph{IEEE Computer
+  Graphics and Applications}, vol.~19, no.~6, pp. 16--27, Nov.-Dec. 1999.
+ \begin{quotation}\noindent This is a cool paper the author present etc. \ldots
+  \emph{Insert Your Annotation here}. \end{quotation}
+
+\bibitem{Remy98}
+D.~R\'{e}my and J.~Vouillon, ``Objective {ML}: An effective object-oriented
+  extension to {ML},'' \emph{Theory And Practice of Objects Systems}, vol.~4,
+  no.~1, pp. 27--50, 1998.
+ \begin{quotation}\noindent I need to write about this. \end{quotation}
+
+\bibitem{Thearling98}
+K.~Thearling, B.~Becker, and D.~DeCosta, ``Visualizing data mining models,'' in
+  \emph{Proc. Integration of Data Mining and Data Visualization Workshop},
+  1998.
+ \begin{quotation}\noindent Kurt Thearling et al. provide an excellent review
+  of the most recent work in the arena of data visualization. Although the work
+  is not intended for IVE applications, most of the ideas were instrumental in
+  understanding some of the inherent difficulties in data visualization. For
+  example, from this work it became evident to us that \emph{orienteering} is
+  one of the most important aspects in an IVE. This indicates that it is
+  important to examine possible solutions to properly orient the user early in
+  the project. Some of the ideas presented includes maintaining a grid that
+  defines the three axes $(x, y, z)$ and the notion of a companion menu that,
+  when invoked, aids the user in locating and transporting themselves within
+  the environment. The authors also emphasize the importance of ``trusting the
+  model.'' Trust here refers to the user's ability to comfortably rely on the
+  methods provided to correctly interpret the visual presentation at hand.
+  \end{quotation}
+
+\bibitem{Wadler98}
+P.~Wadler, ``Why no one uses functional languages,'' \emph{ACM SIGPLAN
+  Notices}, vol.~33, pp. 23--27, 1998.
+ \begin{quotation}\noindent I need to write about this. \end{quotation}
+
+\bibitem{Wang99}
+Y.~Wang and C.~MacKenzie, ``Object manipulation in virtual environments:
+  Relative size matters,'' in \emph{Proc. CHI'99}, May 1999.
+ \begin{quotation}\noindent The authors of this paper investigate the relation
+  between human performance in an IVE and the size of the cursor, object and
+  controller. The \emph{cursor} here refers to the graphical object that maps
+  the input device (controller) to the virtual world. A study was performed to
+  arrive at two conclusions. The first (\emph{the relative size hypothesis})
+  states that the \textbf{interplay} between the size of the controller,
+  cursor, and object has a direct effect on the performance in the virtual
+  environment rather than the size of the controller, cursor or the object
+  \textbf{alone}. The second hypothesis that was proved shows that only the
+  orientation time was fastest when the controller and cursor were largest.
+  This study can help us during the development of our UI system. The 3D
+  pointer that was developed probably should be a little larger than its
+  current size. \end{quotation}
+
+\end{thebibliography}
