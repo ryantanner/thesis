@@ -53,5 +53,6 @@ class EmptySentence extends Sentence    {
 	val dependencies: Map[Int,List[Dependency]] = new HashMap[Int,List[Dependency]]
     val parseTree: ParseTreeNode = new ParseTreeNode
 	val nodes: Map[Int,ParseTreeNode] = new HashMap()
+	var entities: Map[Entity, List[Property]] = Map()
 
 }
