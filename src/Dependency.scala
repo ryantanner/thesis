@@ -10,8 +10,8 @@ package thesis;
 
 abstract class Dependency	{
 
-  val gov: Token
-  val dep: Token
+  val gov: ParseTreeNode
+  val dep: ParseTreeNode
   val relType: String // dependency relation/type
   val relFunc: Relations.dep
 
@@ -20,11 +20,11 @@ abstract class Dependency	{
 }
 
 object Dependency	{
-  def fromXML(node: scala.xml.Node, tokens: List[Token]): Dependency =
+  def fromXML(node: scala.xml.Node, nodes: Map[Int,ParseTreeNode]): Dependency =
     new Dependency	{
-      val gov = tokens((node \ "governor" \ "@idx").text.toInt - 1)
-      val dep = tokens((node \ "dependent" \ "@idx").text.toInt - 1)
+      val gov = nodes((node \ "governor" \ "@idx").text.toInt)
+      val dep = nodes((node \ "dependent" \ "@idx").text.toInt)
       val relType = (node \ "@type") text
-      val relFunc = Relations.handler(relType).apply(gov,dep)
+      val relFunc = Relations.handler(relType)
     }
 }

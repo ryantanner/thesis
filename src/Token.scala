@@ -8,9 +8,9 @@ package thesis;
  * To change this template use File | Settings | File Templates.
  */
 
-abstract class Token	{
+abstract class Token extends Ordered[Token]	{
 
-  val id: String
+  val id: Int
   val word: String
   val lemma: String
   val begin: Int
@@ -21,7 +21,7 @@ abstract class Token	{
   override def toString = word
 
   def toXML =
-    <token id={id}>
+    <token id={id.toString}>
       <word>{word}</word>
       <lemma>{lemma}</lemma>
       <CharacterOffsetBegin>{begin}</CharacterOffsetBegin>
@@ -30,19 +30,33 @@ abstract class Token	{
       <NER>{ner}</NER>
     </token>
 
+	def compare(that: Token) = this.id - that.id
+
 }
 
 object Token	{
 
   def fromXML(node: scala.xml.Node): Token =
     new Token {
-      val id = (node \ "@id").text
+      val id = (node \ "@id").text.toInt
       val word = (node \ "word").text
       val lemma = (node \ "lemma").text
       val begin = (node \ "CharacterOffsetBegin").text.toInt
       val end = (node \ "CharacterOffsetEnd").text.toInt
-      val pos = (node \ "pos").text
-      val ner = (node \ "ner").text
+      val pos = (node \ "POS").text
+      val ner = (node \ "NER").text
     }
+
+}
+
+class EmptyToken extends Token{
+
+  val id: Int = 0
+  val word: String = ""
+  val lemma: String = ""
+  val begin: Int = 0
+  val end: Int = 0
+  val pos: String = ""
+  val ner: String = "O"
 
 }

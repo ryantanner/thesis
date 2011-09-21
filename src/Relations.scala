@@ -14,31 +14,34 @@ object Relations	{
   class dep extends Function2[ParseTreeNode, ParseTreeNode, List[Property]]	{
     // Most basic dependency, all others inherit from this
     def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
+	  println(gov + "\t" + dep)
       println("dep")
-      val props = (List[Property]() /: dep.dependents) { _ ++  _.relFunc.apply }
+	  // use dep.dependents to make list of PTNs which are the dependents of dep, reduce over this calling relFunc to produce props
+      val props = (List[Property]() /: Sentence.sent.dependencies.getOrElse(dep.word.id,List())) { (list, rel) => list ++
+		      rel.relFunc.apply(dep,rel.dep) }
       return props
     }
   }
 
 
   class aux extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("aux")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class auxpass extends aux	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("auxpass")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class cop extends aux	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("cop")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
@@ -50,9 +53,9 @@ object Relations	{
   }
 
   class agent extends arg	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("agent")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
@@ -64,42 +67,42 @@ object Relations	{
   }
 
   class acomp extends comp	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("acomp")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class abbrev extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("abbrev")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
 
 
   class advcl extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("advcl")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class advmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("advmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
 
 
   class amod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       val props = super.apply(gov,dep)
 
-      return props ++ new IsOfType(dep.word)
+      return new IsOfType(dep.word) :: props
 
       println("amod")
       return props
@@ -107,10 +110,10 @@ object Relations	{
   }
 
   class appos extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       val props = super.apply(gov,dep)
 
-      return props ++ new IsOfType(dep.word)
+      return new IsOfType(dep.word) :: props
 
       println("appos")
       return props
@@ -118,289 +121,290 @@ object Relations	{
   }
 
   class attr extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("attr")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class cc extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("cc")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class ccomp extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("ccomp")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class complm extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("complm")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class conj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("conj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class csubj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("csubj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class csubjpass extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("csubjpass")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class det extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("det")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class dobj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("dobj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class expl extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("expl")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class infmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("infmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class iobj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("iobj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class mark extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("mark")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class mwe extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("mwe")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class neg extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("neg")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class nn extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
-      println("nn")
-      return null
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
+        println("nn")
+        val props = super.apply(gov,dep)
+	    return props
     }
   }
 
   class npadvmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("npadvmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class nsubj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("nsubj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class nsubjpass extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("nsubjpass")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class num extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("num")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class number extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("number")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class parataxis extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("parataxis")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class partmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("partmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class pcomp extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("pcomp")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class pobj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("pobj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class poss extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("poss")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class possessive extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("possessive")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class preconj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("preconj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class predet extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("predet")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class prep extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("prep")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class prepc extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("prepc")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class prt extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("prt")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class punct extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("punct")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class purpcl extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("purpcl")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class quantmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("quantmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class rcmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("rcmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class ref extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("ref")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class rel extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("rel")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class tmod extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("tmod")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class xcomp extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("xcomp")
-      return null
+      return super.apply(gov,dep)
     }
   }
 
   class xsubj extends dep	{
-    override def apply(gov: ParseTreeNode, dep:ParseTreeNode): List[Property] = {
+    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): List[Property] = {
       println("xsubj")
-      return null
+      return super.apply(gov,dep)
     }
   }
 

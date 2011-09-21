@@ -10,14 +10,13 @@ package thesis;
 
 abstract class Sentence {
 
-  val tokens: List[Token]
-  val dependencies: Map[String,List[thesis.Dependency]]
-  val parseTree: ParseTreeNode // holds parent
+    val tokens: List[Token]
+    val dependencies: Map[Int,List[Dependency]]      // (gov, list of deps)
+    val parseTree: ParseTreeNode // holds parent
+	val nodes: Map[Int,ParseTreeNode] // nodes and their index
+	var entities: Map[Entity,List[Property]]
 
-  override def toString = tokens + "\n" + dependencies + "\n" + ParseTreeNode.print(parseTree)
-
-
-
+    override def toString = tokens + "\n" + dependencies + "\n" + ParseTreeNode.print(parseTree)
 
 }
 
@@ -28,14 +27,31 @@ object Sentence	{
   val dependencies: List[Dependency] = (List[Dependency]() /: depNode) (_ :+ Dependency.fromXML(_))
 */
 
-  def fromXML(node: scala.xml.Node): Sentence =
-    new Sentence {
-      val tokens = (List[Token]() /: (node \\ "token")) (_ :+ Token.fromXML(_))
-      val dependencies = 	(Map[String,List[Dependency]]() /: (node \\ "basic-dependencies" \\ "dep")) (
-        (map:Map[String,List[Dependency]],dep:scala.xml.Node) => { map + (((dep \ "governor" \ "@idx").text) ->
-            (map.getOrElse(((dep \ "governor" \ "@idx").text),List())
-                      ++ List(Dependency.fromXML(dep,tokens))))})
-      val parseTree = ParseTreeNode.parse(node \\ "parse" text, tokens, dependencies)
-    }
+	var sent:Sentence = new EmptySentence()
+
+	def fromXML(node: scala.xml.Node): Sentence =  {
+		sent = new Sentence {
+			val tokens = (List[Token](new EmptyToken) /: (node \\ "token")) (_ :+ Token.fromXML(_))
+			val (parseTree:ParseTreeNode, nodes:Map[Int,ParseTreeNode]) = ParseTreeNode.parse(node \\ "parse" text, tokens, dependencies)
+			val dependencies = 	(Map[Int,List[Dependency]]() /: (node \\ "basic-dependencies" \\ "dep")) (
+			(map:Map[Int,List[Dependency]],dep:scala.xml.Node) => { map + (((dep \ "governor" \ "@idx").text.toInt)
+					->
+				(map.getOrElse(((dep \ "governor" \ "@idx").text.toInt),List())
+						  ++ List(Dependency.fromXML(dep,nodes))))})
+			// build parsetree first, then dependencies.  after built, go back and add indices to deps
+			nodes foreach { node => node._2.dependents = dependencies.getOrElse(node._2.word.id,List[Dependency]()) map { _.dep.word.id } }
+			var entities = Entity.entityMap(tokens)
+		}
+		return sent
+	}
+}
+
+class EmptySentence extends Sentence    {
+	import scala.collection.immutable.HashMap
+
+	val tokens: List[Token] = List[Token]()
+	val dependencies: Map[Int,List[Dependency]] = new HashMap[Int,List[Dependency]]
+    val parseTree: ParseTreeNode = new ParseTreeNode
+	val nodes: Map[Int,ParseTreeNode] = new HashMap()
 
 }

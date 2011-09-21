@@ -16,7 +16,7 @@ class ParseTreeNode(par: ParseTreeNode, w: Token, p: String)   {
   var word:Token = w
   var childs:List[ParseTreeNode] = scala.collection.immutable.List()
   //var index:Int = i
-  var dependents: List[Dependency] = List[Dependency]()
+  var dependents: List[Int] = List[Int]() // holds list of indices, use Sentence.dependencies to get deps
 
 
   override def toString = if (word == null) "(" + pos + " " + childs.length + " children"
@@ -57,8 +57,9 @@ class ParseTreeNode(par: ParseTreeNode, w: Token, p: String)   {
 
 object ParseTreeNode	{
 
-  def parse(parseString: String, tokens: List[Token], dependencies:Map[String,List[thesis.Dependency]]): ParseTreeNode = {
-    return parser(new ParseTreeNode, parseString.split(" ").toList,tokens, dependencies)
+  def parse(parseString: String, tokens: List[Token], dependencies:Map[Int,List[Dependency]]): (ParseTreeNode, Map[Int,ParseTreeNode]) = {
+      var root = new ParseTreeNode
+	  return (root, parser(root, parseString.split(" ").toList,tokens, dependencies))
   }
 
 /*
@@ -83,8 +84,8 @@ object ParseTreeNode	{
 */
 
 
-  def parser(node: ParseTreeNode, elems:List[String], tokens:List[Token], dependencies:Map[String,List[thesis.Dependency]]): ParseTreeNode = elems match {
-    case List() => node
+  def parser(node: ParseTreeNode, elems:List[String], tokens:List[Token], dependencies:Map[Int,List[Dependency]]): Map[Int,ParseTreeNode] = elems match {
+    case List() => Map[Int,ParseTreeNode]()
     case w :: rest => if ('(' == w.head) {
         val child = new ParseTreeNode(node)
         node :+ child
@@ -93,13 +94,15 @@ object ParseTreeNode	{
       }
       else {
         node.word = tokens.head
-        node.dependents = dependencies.getOrElse(tokens.head.id,List())
+        //node.dependents = dependencies.getOrElse(tokens.head.id,List[Dependency]()) map { _.dep.word.id }
         var n = node
         for (i <- 1 to (w count { c => if (c == ')') true else false }))
           n = n.parent
-        return parser(n,rest,tokens tail, dependencies)
+        val map = parser(n,rest,tokens tail, dependencies)
+	    return map + (tokens.head.id -> node )
       }
   }
+
 
 
   private def print_i(ptn:ParseTreeNode, i:Int): Int = {
