@@ -21,8 +21,9 @@ object Relations	{
                                                                                                     // rel) => list ++
 		//      rel.relFunc.apply(dep,rel.dep)(gov.token) }
 
-	  return  Sentence.sent.dependencies.getOrElse(dep.word.id,List()) map { rel => rel.relFunc.apply(dep,
-		  rel.dep) }.foldLeft(Map[Token,List[Property]]) ((acc,m) => (acc /: m) { (map,
+	  return  (Map[Token,List[Property]]() /: Sentence.sent.dependencies.getOrElse(dep.word.id,
+		  List()) map { rel => rel.relFunc.apply(dep,
+		  rel.dep) } ) ((acc,m) => (acc /: m) { (map,
 	                                                                          kv) => map + (kv._1 -> (map.getOrElse(kv._1,
 		  List[Property]()) ++ kv._2)) } )
 
