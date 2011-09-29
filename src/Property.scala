@@ -32,6 +32,8 @@ class NounProperty(qual:List[Token]) extends Property(qual.head:Token) {
 
 	def ++(qual:List[Token]): NounProperty = new NounProperty((noms ++ qual).toList)
 
+	def ++(qual:NounProperty): NounProperty = new NounProperty((this.noms ++ qual.noms).toList)
+
 }
 
 

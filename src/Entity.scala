@@ -30,12 +30,13 @@ object Entity   {
 	}
 	//val ners = groupNer(tokList) filter { l => (l.head \ "NER").text != "O" }
 
-	def entityMap(list: List[Token]): Map[Entity,List[Property]] = {
+	def entityMap(tokens: List[Token]): Map[Entity,List[Property]] = {
 		// Basically, take the list from groupNer, remove whatever we don't care about, map whatever is left
 		// to entity objects and turn that into a map (entity -> list[property])
-		return ((groupNer(list map { tok => List(tok) })
-				filter { l => l.head.ner != "O" & !l.isEmpty }
+		return ((groupNer(tokens map { tok => List(tok) })
+				filter { nerGroup => nerGroup.head.ner != "O" & !nerGroup.isEmpty }
 				map { new Entity(_) }
-				map { (_ -> List[Property]()) }) :\ Map[Entity,List[Property]]()) ( (l,m) => m + l)
+				map { (_ -> List[Property]()) }) :\ Map[Entity,List[Property]]()) ( (props,
+		                                                                             entityMap) => entityMap + props)
 	}
 }
