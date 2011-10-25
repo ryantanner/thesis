@@ -15,8 +15,16 @@ abstract class Sentence {
     val parseTree: ParseTreeNode // holds parent
 	val nodes: Map[Int,ParseTreeNode] // nodes and their index
 	var entities: Map[Entity,List[Property]]
+	var properties: Map[Token,List[Property]]
+	val root: List[Int]
 
     override def toString = tokens + "\n" + dependencies + "\n" + ParseTreeNode.print(parseTree)
+
+//	def root(): List[Int] = {
+//		return (Range(1,tokens.length+1).filterNot({ dependencies.map ({ dl => dl._2 map { d =>
+//			d.dep.word.id } }).foldLeft(List[Int]())({ (acc:List[Int],l:List[Int]) => (l ++ acc) }) contains _ })
+//				filter { dependencies.keys.toList contains _ }).toList
+//		}
 
 }
 
@@ -33,7 +41,7 @@ object Sentence	{
 		sent = new Sentence {
 			val tokens = (List[Token](new EmptyToken) /: (node \\ "token")) (_ :+ Token.fromXML(_))
 			val (parseTree:ParseTreeNode, nodes:Map[Int,ParseTreeNode]) = ParseTreeNode.parse(node \\ "parse" text, tokens, dependencies)
-			val dependencies = 	(Map[Int,List[Dependency]]() /: (node \\ "basic-dependencies" \\ "dep")) (
+			val dependencies = 	(Map[Int,List[Dependency]]() /: (node \\ "collapsed-ccprocessed-dependencies" \\ "dep")) (
 			(map:Map[Int,List[Dependency]],dep:scala.xml.Node) => { map + (((dep \ "governor" \ "@idx").text.toInt)
 					->
 				(map.getOrElse(((dep \ "governor" \ "@idx").text.toInt),List())
@@ -41,7 +49,19 @@ object Sentence	{
 			// build parsetree first, then dependencies.  after built, go back and add indices to deps
 			nodes foreach { node => node._2.dependents = dependencies.getOrElse(node._2.word.id,List[Dependency]()) map { _.dep.word.id } }
 			var entities = Entity.entityMap(tokens)
+			val root = (Range(1,tokens.length+1).filterNot({ dependencies.map ({ dl => dl._2 map { d =>
+					d.dep.word.id } }).foldLeft(List[Int]())({ (acc:List[Int],l:List[Int]) => (l ++ acc) }) contains _ })
+						filter { dependencies.keys.toList contains _ }).toList
+			var properties: Map[Token,List[Property]] = Map()
 		}
+
+		sent.properties = sent.root.isEmpty match {
+			case true =>   Map[Token,List[Property]]()
+			case false =>   (Map[Token,List[Property]]() /: (sent.dependencies(sent.root(0)) map { e => e.relFunc(e
+					.gov,
+				e.dep) } )) { (acc,dep) => (acc /: dep) { (sacc,kv) => sacc + (kv._1 -> (sacc.getOrElse(kv._1,List[Property]()) ++ kv._2)) } }
+		}
+
 		return sent
 	}
 }
@@ -54,5 +74,7 @@ class EmptySentence extends Sentence    {
     val parseTree: ParseTreeNode = new ParseTreeNode
 	val nodes: Map[Int,ParseTreeNode] = new HashMap()
 	var entities: Map[Entity, List[Property]] = Map()
+	var properties: Map[Token,List[Property]] = Map()
+	val root: List[Int] = List()
 
 }

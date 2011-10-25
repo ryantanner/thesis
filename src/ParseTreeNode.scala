@@ -86,7 +86,7 @@ object ParseTreeNode	{
 
   def parser(node: ParseTreeNode, elems:List[String], tokens:List[Token], dependencies:Map[Int,List[Dependency]]): Map[Int,ParseTreeNode] = elems match {
     case List() => Map[Int,ParseTreeNode]()
-    case w :: rest => if ('(' == w.head) {
+    case w :: rest => if (w.length > 0 && '(' == w.head) {
         val child = new ParseTreeNode(node)
         node :+ child
         child.pos = w slice (1,w.length)

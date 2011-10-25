@@ -9,23 +9,45 @@ package thesis;
  */
 
 
+class Relations(s: Sentence)    {
+
+	val sentence:Sentence = s
+
+}
 
 object Relations	{
+
+
+	// These two functions are used to add properties to the map.  This just eliminates the getOrElse from being
+	// littered all over this object
+	def add(map: Map[Token,List[Property]], tok: Token, prop: Property): Map[Token,List[Property]] =   {
+		return map + (tok -> (map.getOrElse(tok,List[Property]()) :+ prop))
+	}
+
+	def add(map: Map[Token,List[Property]], tok: Token, prop: Property, rmFunc: (Property) => Boolean):
+		Map[Token,List[Property]] =   {
+		// This one is a bit more complicated.  rmFunc is passed to a filterNot on the getOrElse to remove properties
+		// that we don't want in the props map anymore.  nsubj is a good example of why this is needed.
+		return map + (tok -> (prop :: (map.getOrElse(tok,List[Property]()) filterNot rmFunc)))
+	}
+
   class dep extends Function2[ParseTreeNode, ParseTreeNode, Map[Token,List[Property]]]	{
     // Most basic dependency, all others inherit from this
     def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
 	  println(gov + "\t" + dep)
-      println("dep")
+      //println("dep")
 	  // use dep.dependents to make list of PTNs which are the dependents of dep, reduce over this calling relFunc to produce props
       //val props = (List[Property]() /: Sentence.sent.dependencies.getOrElse(dep.word.id,List())) { (list,
                                                                                                     // rel) => list ++
 		//      rel.relFunc.apply(dep,rel.dep)(gov.token) }
 
-	  return  (Map[Token,List[Property]]() /: Sentence.sent.dependencies.getOrElse(dep.word.id,
+	  if (gov.word.id == dep.word.id)   {
+		  return Map[Token,List[Property]]()
+	  }
+
+	  return  (Map[Token,List[Property]]() /: (Sentence.sent.dependencies.getOrElse(dep.word.id,
 		  List()) map { rel => rel.relFunc.apply(dep,
-		  rel.dep) } ) ((acc,m) => (acc /: m) { (map,
-	                                                                          kv) => map + (kv._1 -> (map.getOrElse(kv._1,
-		  List[Property]()) ++ kv._2)) } )
+		  rel.dep) }) ) ((acc,m) => (acc /: m) { (map,kv) => map + (kv._1 -> (map.getOrElse(kv._1,List[Property]()) ++ kv._2)) } )
 
       //return Map((gov.token -> props))
     }
@@ -51,7 +73,9 @@ object Relations	{
   class cop extends aux	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("cop")
-      return super.apply(gov,dep)
+		val props = super.apply(gov,dep)
+
+	    return add(add(props,gov.word,new Relation(dep.word)),gov.word,new IsOfType(gov.word))
     }
   }
 
@@ -106,27 +130,22 @@ object Relations	{
     }
   }
 
-
-
   class amod extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
-      val props = super.apply(gov,dep)
+        val props = super.apply(gov,dep)
+	    println("amod")
 
-      return props + (gov.word -> (new IsOfType(dep.word) :: props.getOrElse(gov.word,List[Property]())))
-
-      println("amod")
-      return props
+      //return props + (gov.word -> (new IsOfType(dep.word) :: props.getOrElse(gov.word,List[Property]())))
+	  return add(props,gov.word,new IsOfType(dep.word))
     }
   }
 
   class appos extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       val props = super.apply(gov,dep)
+	    println("appos")
 
-	    return props + (gov.word -> (new IsOfType(dep.word) :: props.getOrElse(gov.word,List[Property]())))
-
-      println("appos")
-      return props
+	    return add(props,gov.word,new IsOfType(dep.word))
     }
   }
 
@@ -239,7 +258,8 @@ object Relations	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
         println("nn")
         val props = super.apply(gov,dep)
-	    return props + (gov.word -> (props.getOrElse(gov.word,List[Property]()) :+ new NounProperty(dep.word)))
+	    //return props + (gov.word -> (props.getOrElse(gov.word,List[Property]()) :+ new NounProperty(dep.word)))
+	    return add(props,gov.word,new NounProperty(dep.word))
     }
   }
 
@@ -257,10 +277,15 @@ object Relations	{
 	    val props = super.apply(gov,dep)
 	    //dep is "thing"
 	    //    dep should be some property saying it is a "thing" for a clause
-	    val nns = props(dep.word) filter { _.getClass == classOf[NounProperty] } map { np:Property => np
-			    .asInstanceOf[NounProperty] } reduceRight { (np:NounProperty,nn:NounProperty) => nn ++ np }
+	    val nns = (new NounProperty(dep.word) /: (props.getOrElse(dep.word,List[Property]()) filter { _.getClass ==
+			    classOf[NounProperty] } map { np:Property => np match { case np2: NounProperty => np2; case _ =>
+		    throw new ClassCastException } } ) ) { (np:NounProperty,nn:NounProperty) => nn ++ np }
 
-	    return props + (dep.word -> (nns :: (props(dep.word) filterNot { p => p.getClass == classOf[NounProperty] })))
+	    //return props + (dep.word -> (nns :: (props.getOrElse(dep.word,List[Property]()) filterNot { p => p.getClass
+	    // ==
+		//	    classOf[NounProperty] })))
+	    val temp = add(props,dep.word,nns,{ p:Property => p.getClass == classOf[NounProperty] })
+	    return add(temp,gov.word,new Subject(nns))
       //return super.apply(gov,dep)
     }
   }
@@ -273,16 +298,26 @@ object Relations	{
   }
 
   class num extends dep	{
-    override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
-      println("num")
-      return super.apply(gov,dep)
-    }
+		override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+			println("num")
+			val props = super.apply(gov, dep)
+			val nm = props.getOrElse(dep.word, List())
+			if (!nm.isEmpty)    {
+				return add(props,gov.word,new Quantity(nm(0).asInstanceOf[NumberModifier],List(gov.word)),
+				{ p:Property => p.getClass ==
+						classOf[NumberModifier]})
+			}
+			return add(props,gov.word,new Number(dep.word))
+		}
   }
 
   class number extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("number")
-      return super.apply(gov,dep)
+	    val props = super.apply(gov,dep)
+
+	  return  add(props,gov.word,new NumberModifier(dep.word, List(gov.word)))
+
     }
   }
 
@@ -426,6 +461,74 @@ object Relations	{
     }
   }
 
+	class conj_or extends conj  {
+		override def apply(gov: ParseTreeNode, dep:ParseTreeNode): Map[Token,List[Property]] = {
+			println("conj_or")
+			val props = super.apply(gov,dep)
+
+			return add(props,gov.word,new AlternativePhrase(dep.word))
+		}
+	}
+
+	class prep_as extends prep  {
+		override def apply(gov: ParseTreeNode, dep:ParseTreeNode): Map[Token,List[Property]] = {
+			println("prep_as")
+			val props = super.apply(gov,dep)
+
+			return add(props,gov.word,new As(dep.word))
+		}
+	}
+
+	class prep_from extends prep    {
+		override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+			println("prep_from")
+			val props = super.apply(gov, dep)
+
+			if (dep.word.ner == "DATE") {
+				 // get deps whose rel is num
+				// turn into date
+
+				/*val date = new DateRange(dep.word, (dep.dependents map { Sentence.sent
+						.dependencies.getOrElse(_,List[Dependency]()) } reduceLeft { (acc,
+				                                                                      l) => acc ++ (l filter { _
+						.relType == "num"})}).head.dep.word)*/
+				val date = new DateRange(dep.word,props(dep.word)(0).quality)
+				return add(props,gov.word,date)
+			}
+			return props
+
+		}
+	}
+
+	class prep_with extends prep  {
+		override def apply(gov: ParseTreeNode, dep:ParseTreeNode): Map[Token,List[Property]] = {
+			println("prep_with")
+			val props = super.apply(gov,dep)
+
+			return add(props,gov.word,new PartsOfEntity(List(dep.word)))
+		}
+	}
+
+	class prep_in extends prep  {
+		override def apply(gov: ParseTreeNode, dep:ParseTreeNode): Map[Token,List[Property]] = {
+			println("prep_with")
+			val props = super.apply(gov,dep)
+			return props
+			//return add(props,gov.word,new PartsOfEntity(List(dep.word)))
+		}
+	}
+
+//	class prep_including extends prep   {
+//		override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+//			println("prep_including")
+//			val props = super.apply(gov, dep)
+//
+//			val parts = new PartsOf
+//			//return add(props,gov.word,new PartsOfEntity(props.getOrElse(dep.word)))
+//		}
+//	}
+
+
   def handler(relType: String): dep = relType match  {
     case "abbrev" 		=> return new abbrev
     case "acomp"  		=> return new acomp
@@ -479,6 +582,11 @@ object Relations	{
     case "tmod"			=> return new tmod
     case "xcomp"		=> return new xcomp
     case "xsubj"		=> return new xsubj
+	case "conj_or"      => return new conj_or
+	case "prep_as"      => return new prep_as
+	case "prep_from"    => return new prep_from
+	case "prep_with"    => return new prep_with
+	case "prep_in"      => return new prep_in
     case _				=> return new dep
   }
 
