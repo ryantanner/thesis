@@ -1,4 +1,4 @@
-package thesis.test.thesis.wiki;
+package test.thesis.wiki;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

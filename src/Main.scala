@@ -53,5 +53,7 @@ object Main {
 
 		return ((d \ "document" \ "sentences" \\  "sentence") map { s => Sentence.fromXML(s) }).toList
 	}
+        
+  
 
 }
