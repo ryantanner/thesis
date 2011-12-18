@@ -11,6 +11,3 @@ From there:
 > sentence.nodes // Alternative to traversing the tree.  This is a map of token indices and ParseTreeNodes
 > sentence.entities // A map of Entity objects (built from the Named Entity Recognition in Stanford) to a list of
                     // properties.
-                    
-
-    a conflicting test
