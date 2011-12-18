@@ -44,14 +44,18 @@ object Main {
 	}
 
 	def initMany(file: String = "data/ww2sample.txt.xml"): List[Sentence] = {
+		val f = new File(file)
+		return initMany(f)
+	}
+	
+	def initMany(file: java.io.File): List[Sentence] = {
 		import scala.xml.parsing.ConstructingParser
 
-		val f = new File(file)
-		val p = ConstructingParser.fromFile(f, true /*preserve whitespace*/)
+		val p = ConstructingParser.fromFile(file, true /*preserve whitespace*/)
 		val d: scala.xml.Document = p.document()
 
 
-		return ((d \ "document" \ "sentences" \\  "sentence") map { s => Sentence.fromXML(s) }).toList
+		return ((d \ "document" \ "sentences" \\  "sentence") map { s => Sentence.fromXML(s) }).toList		
 	}
         
   

@@ -508,8 +508,10 @@ object Relations	{
 						.dependencies.getOrElse(_,List[Dependency]()) } reduceLeft { (acc,
 				                                                                      l) => acc ++ (l filter { _
 						.relType == "num"})}).head.dep.word)*/
-				val date = new DateRange(dep.word,props(dep.word)(0).quality)
-				return add(props,gov.word,date)
+				if (props.isDefinedAt(dep.word))	{
+					val date = new DateRange(dep.word,props(dep.word)(0).quality)
+					return add(props,gov.word,date)
+				}
 			}
 			return props
 
