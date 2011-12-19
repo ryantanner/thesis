@@ -47,10 +47,10 @@ object Sentence	{
 			(map:Map[Int,List[Dependency]],dep:scala.xml.Node) => { map + (((dep \ "governor" \ "@idx").text.toInt)
 					->
 				(map.getOrElse(((dep \ "governor" \ "@idx").text.toInt),List())
-						  ++ List(Dependency.fromXML(dep,nodes))))})
+						  ++ List(Dependency.fromXML(dep,nodes)) filter { n => (n.dep != null && n.gov != null) } ))})
 			// build parsetree first, then dependencies.  after built, go back and add indices to deps
 			//scala.util.control.Breaks.break()
-			if (nodes != null) nodes foreach { node => if (node._2 != null) { node._2.dependents = dependencies.getOrElse(node._2.word.id,List[Dependency]()) map { _.dep.word.id } } }
+			if (nodes != null) nodes foreach { node => if (node._2.word != null) { node._2.dependents = dependencies.getOrElse(node._2.word.id,List[Dependency]()) map { _.dep.word.id } } }
 			var entities = Entity.entityMap(tokens)
 			val root = (Range(1,tokens.length+1).filterNot({ dependencies.map ({ dl => dl._2 map { d =>
 					d.dep.word.id } }).foldLeft(List[Int]())({ (acc:List[Int],l:List[Int]) => (l ++ acc) }) contains _ })

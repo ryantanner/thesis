@@ -22,10 +22,10 @@ abstract class Dependency	{
 object Dependency	{
   def fromXML(node: scala.xml.Node, nodes: Map[Int,ParseTreeNode]): Dependency =
     new Dependency	{
-      val gov = nodes.getOrElse[ParseTreeNode]((node \ "governor" \ "@idx").text.toInt,null)
-      val dep = nodes.getOrElse[ParseTreeNode]((node \ "dependent" \ "@idx").text.toInt,null)
-      val relType = (node \ "@type") text
-      val relFunc = Relations.handler(relType)
-	    println(relType)
+		val gov = nodes.getOrElse((node \ "governor" \ "@idx").text.toInt,null)
+		val dep = nodes.getOrElse((node \ "dependent" \ "@idx").text.toInt,null)
+		val relType = (node \ "@type") text
+		val relFunc = Relations.handler(relType)
+		println(relType)
     }
 }

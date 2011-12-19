@@ -319,9 +319,12 @@ object Relations	{
 			val props = super.apply(gov, dep)
 			val nm = props.getOrElse(dep.word, List())
 			if (!nm.isEmpty)    {
-				return add(props,gov.word,new Quantity(nm(0).asInstanceOf[NumberModifier],List(gov.word)),
-				{ p:Property => p.getClass ==
-						classOf[NumberModifier]})
+				return nm(0) match {
+					case a: NumberModifier => add(props,gov.word,new Quantity(a,List(gov.word)),
+							{ p:Property => p.getClass ==
+							classOf[NumberModifier]})
+					case _ => add(props,gov.word,new Number(dep.word))
+				}
 			}
 			return add(props,gov.word,new Number(dep.word))
 		}

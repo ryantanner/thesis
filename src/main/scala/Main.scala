@@ -55,7 +55,14 @@ object Main {
 		val d: scala.xml.Document = p.document()
 
 
-		return ((d \ "document" \ "sentences" \\  "sentence") map { s => Sentence.fromXML(s) }).toList		
+		return ((d \ "document" \ "sentences" \\  "sentence") map { s => 
+			try { 
+			  Sentence.fromXML(s)
+			} catch {
+			  	case e: NullPointerException => println(e); new EmptySentence()
+				case _ => new EmptySentence()
+			}
+		}).toList filter { _.getClass != classOf[EmptySentence] }
 	}
         
   
