@@ -44,8 +44,7 @@ object Main {
 	}
 
 	def initMany(file: String = "data/ww2sample.txt.xml"): List[Sentence] = {
-		val f = new File(file)
-		return initMany(f)
+		return initMany(new File(file))
 	}
 	
 	def initMany(file: java.io.File): List[Sentence] = {
