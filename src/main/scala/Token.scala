@@ -10,6 +10,7 @@ package thesis;
 
 abstract class Token extends Ordered[Token]	{
 
+	val sent: Int
   val id: Int
   val word: String
   val lemma: String
@@ -35,9 +36,12 @@ abstract class Token extends Ordered[Token]	{
 }
 
 object Token	{
+	
+	var curSentence:Int = -1
 
   def fromXML(node: scala.xml.Node): Token =
     new Token {
+	  val sent = curSentence
       val id = (node \ "@id").text.toInt
       val word = (node \ "word").text
       val lemma = (node \ "lemma").text
@@ -50,7 +54,7 @@ object Token	{
 }
 
 class EmptyToken extends Token{
-
+  val sent = -1
   val id: Int = 0
   val word: String = ""
   val lemma: String = ""

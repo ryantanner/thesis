@@ -105,6 +105,14 @@ class PartsOfEntity(qual: List[Token]) extends Property(qual.head: Token)  {
 	override def toString:String = "Constituents: " + parts.mkString(" and part ")
 }
 
+class AgentRelation(a: Token, d: Token) extends Property(d: Token)	{
+	// Typically a "doer" of an action
+	val action = a
+	val doer = d
+	
+	override def toString:String = a + " did \"" + d + "\" upon subject"
+}
+
 trait IsOf
 trait HasA
 

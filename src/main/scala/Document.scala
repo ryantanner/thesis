@@ -23,7 +23,7 @@ abstract class Document {
         
 
         def aliasProps(): Map[Alias,List[Property]] = {
-          val fal = aliases map { kv => kv._2 :+ kv._1 } reduceLeft  { (acc,l) => acc ++ l }
+          val fal = aliases map { kv => kv._2 :+ kv._1 } reduceLeft { (acc,l) => acc ++ l }
           val aps = sentences map {
 	          s => val ap = (s.properties map {
 		          tp => fal filter { _.tokenIsInRange(tp._1,s.id) } map { (_ -> tp._2) }
@@ -47,6 +47,10 @@ abstract class Document {
 		      (Map[Alias,List[Property]]() /: aliasProps) { (acc,m) => acc + (m._1 -> (m._2 filter { p => p.quality
 				      .ner != filter} ))}
 		}
+		
+/*		def aliasesForToken(tok: Token): List[Alias] = {
+		
+		 }*/
 
 
 }
@@ -65,15 +69,17 @@ object Document {
 		}
 	}
         
-        def fromFile(file: String = "ww2sample.txt.xml"): Document = {
-          import scala.xml.parsing.ConstructingParser
-
-          val f = new java.io.File(file)
-          val p = ConstructingParser.fromFile(f, true /*preserve whitespace*/)
-          val d: scala.xml.Document = p.document()
-
-
-          return Document.fromXML(d)
+        def fromFile(file: String = "data/ww2sample.txt.xml"): Document = {
+			return fromFile(new java.io.File(file))
         }
+
+		def fromFile(file: java.io.File): Document = {
+			import scala.xml.parsing.ConstructingParser
+
+			val p = ConstructingParser.fromFile(file, true /*preserve whitespace*/)
+			val d: scala.xml.Document = p.document()
+
+			return Document.fromXML(d)			
+		}
 
 }

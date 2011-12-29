@@ -26,9 +26,9 @@ abstract class Alias {
         
         def tokenIsInRange(tok: Token, s: Int): Boolean = {
           if (tok.id >= start && tok.id < end && s == sentence)
-            return true;
+            return true
           else
-            return false;          
+            return false
         }
 
 }

@@ -73,29 +73,39 @@ object Relations	{
 
 
   class aux extends dep	{
+	// Auxillary
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("aux")
+		/* Because aux handles the relationship between the main verb of a sentence and non-main verb,
+		 * e.g., "has died" becomes aux(died,has), this provides only tense information.  Unlikely to be
+		 * useful and disregarded for now.
+		 */
       return super.apply(gov,dep)
     }
   }
 
   class auxpass extends aux	{
+	// Passive auxillary
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("auxpass")
+/* Similar to aux, this is the passive verb in (e.g.) "has been killed" such that auxpass(killed,been) */
       return super.apply(gov,dep)
     }
   }
 
   class cop extends aux	{
+	// Copula
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("cop")
 		val props = super.apply(gov,dep)
-
+		/* Connects be-verbs to their subjects.  VERY useful.  */
 	    return add(add(props,gov.word,new Relation(dep.word)),gov.word,new IsOfType(gov.word))
     }
   }
 
   class arg extends dep {
+	// Argument
+	// Pass-through, only here for OOP purposes
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       val props = super.apply(gov,dep)
       return props
@@ -103,13 +113,23 @@ object Relations	{
   }
 
   class agent extends arg	{
+	// Agent
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("agent")
-      return super.apply(gov,dep)
+		/* Provides "extra" information to the verb
+		 * e.g., "The man has been killed by the police" agent(killed,police)
+		 * Introduced by preposition "by"
+		 */
+		val props = super.apply(gov,dep)
+
+		return add(props,gov.word,new AgentRelation(gov.word,dep.word))
+//      return super.apply(gov,dep)
     }
   }
 
   class comp extends arg {
+	// Complement
+	// Only here for OOP purposes
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       val props = super.apply(gov,dep)
       return props
@@ -117,9 +137,13 @@ object Relations	{
   }
 
   class acomp extends comp	{
+	// Adjectival complement
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("acomp")
-      return super.apply(gov,dep)
+/* Object of the verb
+ * "She looks beautiful" acomp(looks,beautiful)
+*/
+      return add(super.apply(gov,dep),gov.word,new IsOfType(dep.word))
     }
   }
 

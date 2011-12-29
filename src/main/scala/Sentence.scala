@@ -41,6 +41,8 @@ object Sentence	{
 
 	def fromXML(node: scala.xml.Node): Sentence =  {
 		sent = new Sentence {
+			val id: Int = (node \ "@id").text.toInt
+			Token.curSentence = id
 			val tokens = (List[Token](new EmptyToken) /: (node \\ "token")) (_ :+ Token.fromXML(_))
 			val (parseTree:ParseTreeNode, nodes:Map[Int,ParseTreeNode]) = ParseTreeNode.parse(node \\ "parse" text, tokens, dependencies)
 			val dependencies = 	(Map[Int,List[Dependency]]() /: (node \\ "collapsed-ccprocessed-dependencies" \\ "dep")) (
@@ -55,8 +57,7 @@ object Sentence	{
 			val root = (Range(1,tokens.length+1).filterNot({ dependencies.map ({ dl => dl._2 map { d =>
 					d.dep.word.id } }).foldLeft(List[Int]())({ (acc:List[Int],l:List[Int]) => (l ++ acc) }) contains _ })
 						filter { dependencies.keys.toList contains _ }).toList
-			var properties: Map[Token,List[Property]] = Map()
-			val id: Int = (node \ "@id").text.toInt
+			var properties: Map[Token,List[Property]] = Map()		
 		}
 
 		sent.properties = sent.root.isEmpty match {
