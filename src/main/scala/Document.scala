@@ -48,6 +48,18 @@ abstract class Document {
 				      .ner != filter} ))}
 		}
 		
+		def printConnections = {
+			nerFilter() map { ner => println("\n" + resolve(ner._1)); 
+				ner._2 map { 
+					p => println("\t" + (aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } }));
+						 println("\t\t" + sentences(p.quality.sent).tokens.mkString(" ")); } }
+		}
+		
+		def connections = {
+			nerFilter() map { ner => (ner._1 -> (ner._2 map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent }} filter {
+				_.size > 0} apply(0) apply(0) } )) }
+		}
+		
 /*		def aliasesForToken(tok: Token): List[Alias] = {
 		
 		 }*/
