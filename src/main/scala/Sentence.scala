@@ -51,7 +51,6 @@ object Sentence	{
 				(map.getOrElse(((dep \ "governor" \ "@idx").text.toInt),List())
 						  ++ List(Dependency.fromXML(dep,nodes)) filter { n => (n.dep != null && n.gov != null) } ))})
 			// build parsetree first, then dependencies.  after built, go back and add indices to deps
-			//scala.util.control.Breaks.break()
 			if (nodes != null) nodes foreach { node => if (node._2.word != null) { node._2.dependents = dependencies.getOrElse(node._2.word.id,List[Dependency]()) map { _.dep.word.id } } }
 			var entities = Entity.entityMap(tokens)
 			val root = (Range(1,tokens.length+1).filterNot({ dependencies.map ({ dl => dl._2 map { d =>

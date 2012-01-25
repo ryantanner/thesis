@@ -12,6 +12,7 @@ abstract class Document {
 
 	val sentences: List[Sentence]
 	val aliases: Map[Alias,List[Alias]]
+	val filePath: String
 
 	def resolve(alias:Alias): String = {
 		return sentences(alias.sentence-1).tokens.slice(alias.start,alias.end).mkString(" ")
@@ -54,6 +55,14 @@ abstract class Document {
 					p => println("\t" + (aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } }));
 						 println("\t\t" + sentences(p.quality.sent).tokens.mkString(" ")); } }
 		}
+
+        def conMap = {
+            nerFilter() map { case (ner, props) =>
+                // Making a map of tuples: (Entity stuff) -> (dependent entities, properties connecting them)
+                (resolve(ner), true) -> ((props map { p => sentences(p.quality.sent).tokens }).flatten,
+                  Utilities.multiFlatten((props map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } } } )))
+            }
+        }
 		
 		def connections = {
 			nerFilter() map { ner => (ner._1 -> (ner._2 map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent }} filter {
@@ -69,7 +78,7 @@ abstract class Document {
 
 object Document {
 
-	def fromXML(node: xml.NodeSeq): Document = {
+	def fromXML(node: xml.NodeSeq, fileName: String): Document = {
 		return new Document {
 			val sentences = ((node \ "document" \ "sentences" \\  "sentence") map { s => Sentence
 					.fromXML(s)}).toList
@@ -77,7 +86,8 @@ object Document {
                         temp foreach { t => t.tail map { a => a.rep = t.head }}
 			val aliases = Map[Alias,List[Alias]]() ++ (temp map { l => (l filter { _.representative == true } apply
 					(0)) -> (l filter { _.representative == false } toList)})
-                        
+			
+            val filePath = fileName       
 		}
 	}
         
@@ -91,7 +101,7 @@ object Document {
 			val p = ConstructingParser.fromFile(file, true /*preserve whitespace*/)
 			val d: scala.xml.Document = p.document()
 
-			return Document.fromXML(d)			
+			return Document.fromXML(d, file.getPath)			
 		}
 
 }
