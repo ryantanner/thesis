@@ -74,6 +74,10 @@ abstract class Document {
 		 }*/
 
 
+         def locations = {
+            sentences map { _.locations } filter { _.nonEmpty }
+        }
+
 }
 
 object Document {

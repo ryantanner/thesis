@@ -31,19 +31,23 @@ object ThesisSession	{
 		}
 	}
 	
-	def insertDocument(d: thesis.Document) = { 
-		startDbSession()
-        transaction {		
-        val newDoc = new thesis.db.Document(d.filePath)
-        EntityGraph.documents.insert(newDoc)
+	def insertDocument(d: thesis.Document): Long = { 
+        val ret = EntityGraph.documents.insert(new thesis.db.Document(d.filePath))
         println("Inserted document: " + d.filePath)
-      }
+        //return retDoc.id
+        return ret.id
     }
 
-    def insertAlias(entityValue: String, representative: Boolean, filePath: String, masterId: Option[Long]): Long = {
-      val docId = getDocumentId(filePath).first.id
-      val newEnt = new Entity(entityValue, None, representative, masterId)
-        EntityGraph.entities.insert(newEnt)
+    def insertSentence(s: thesis.Sentence, dId: Long): Long = {
+        val sent = s.tokens.mkString(" ")
+        val newS = new Sentence(dId, sent)
+        EntityGraph.sentences.insert(newS)
+        return newS.id.a1
+    }
+
+    def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long]): Long = {
+        val newEnt = EntityGraph.entities.insert(new Entity(entityValue, None, representative, masterId))
+        EntityGraph.entitiesFromDocs.insert(new DocumentMatches(newEnt.id, docId))
       println("New entity inserted")
       return newEnt.id
     }
@@ -63,6 +67,21 @@ object ThesisSession	{
         val p = new PropertyQuality(pId, key, qual, strength)
         EntityGraph.qualitiesOfProperties.insert(p)
     }
+
+    def insertLocation(loc: String, sId: Long) = {
+        val l = new Location(loc, sId, None, None)
+        EntityGraph.locations.insert(l)
+    }
+
+    def insertLocation(loc: String, sId: Long, lat: String, lng: String) = {
+        val l = new Location(loc, sId, Some(lat), Some(lng))
+        EntityGraph.locations.insert(l)
+    }
+
+    def insertConnection(propId: Long, govId: Long, depId: Long, strength: Int = 0) = {
+        
+    }
+
 
 
 }

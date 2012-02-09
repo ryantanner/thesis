@@ -28,6 +28,22 @@ abstract class Sentence {
 //				filter { dependencies.keys.toList contains _ }).toList
 //		}
 
+    def locations: List[String] = {
+      groupPrefix(tokens map { t => t.ner match { 
+            case "LOCATION" => t.word
+            case _ => None 
+          } 
+        })(_ == None) map { _ filter { _ != None } } filter { _.nonEmpty } map { _ map { _.asInstanceOf[String] } } map { _ mkString " " }
+    }
+
+    def groupPrefix[T](xs: List[T])(p: T => Boolean): List[List[T]] = xs match {
+       case List() => List()
+       case x :: xs1 => 
+         val (ys, zs) = xs1 span (!p(_))
+         (x :: ys) :: groupPrefix(zs)(p)  
+    }
+    
+
 }
 
 object Sentence	{

@@ -90,6 +90,18 @@ class Sentence(val documentId: Long,
 					def id = compositeKey(documentId,sent)
 					
 				}
+
+class Location(val loc: String,
+                val sentenceId: Long,
+                val lat: Option[String],
+                val lng: Option[String]) extends KeyedEntity[CompositeKey2[String,Long]] {
+
+                def id = compositeKey(loc, sentenceId)
+
+}
+
+
+
 				
 
 				
@@ -127,6 +139,8 @@ object EntityGraph extends Schema	{
 							via[DocumentMatches]((e,d,dm) => (e.id === dm.entityId,
 															  d.id === dm.documentId))
 	
+    val locations = table[Location]
+
 	on(entities)(e => declare(
 		e.id is(unique,autoIncremented),
         e.value is (indexed, dbType("text")),
@@ -134,7 +148,6 @@ object EntityGraph extends Schema	{
 	))
 	
 	on(properties)(p => declare(
-		p.id is(unique),
 		p.value is(indexed, dbType("text"))
 	))
 	
@@ -145,6 +158,15 @@ object EntityGraph extends Schema	{
 	on(qualitiesOfProperties)(q => declare(
 		columns(q.key,q.quality) are(indexed)
 	))
+
+    on(locations)(l => declare(
+      l.loc is(indexed),
+      l.sentenceId is(indexed)
+    ))
+
+    on(sentences)(s => declare(
+      s.sent is (dbType("text"))
+    ))
 	
 	
 }

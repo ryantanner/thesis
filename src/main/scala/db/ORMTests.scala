@@ -16,27 +16,13 @@ object ORMTests     {
         val d = Document.fromFile()
 
         ThesisSession.startDbSession()
-        
-        transaction {
-            ThesisSession.insertDocument(d)
-            //ThesisSession.insertAlias("World War 2", false, "data/ww2sample.txt.xml")
-            val alias = d.aliases.keys.head
-            ThesisSession.insertAlias(d.resolve(alias), alias.representative, d.filePath, None)
-        }
-
-        transaction {
-            val t = from(EntityGraph.entities)(s => select(s)).first
-            println(t.value)
-        }
-
         insertAllFromDocument(d)
     }
 
     def insertAllFromDocument(d: thesis.Document)  {
-
+        var dId:Long = 0
+        try {
         transaction {
-            ThesisSession.insertDocument(d)
-
             // Insert aliases
 /*
             d.aliases foreach { case (rep, deps) =>
@@ -53,10 +39,22 @@ object ORMTests     {
 
             }
 */
+            dId = ThesisSession.insertDocument(d)
+        }
+      transaction {
+            d.sentences foreach { s =>
+                val sId = ThesisSession.insertSentence(s, dId)
+
+                  s.locations foreach { l =>
+                    ThesisSession.insertLocation(l, sId)
+                  }
+            
+            }
+            println("Inserted sentences and locations")
             d.conMap foreach { case (rep, deps) =>
 
                 println(rep._1)
-                val eId = ThesisSession.insertAlias(rep._1, true, d.filePath, None)
+                val eId = ThesisSession.insertAlias(rep._1, true, dId, None)
 
                 println("Inserted master alias")
                 println(rep._1)
@@ -76,13 +74,16 @@ object ORMTests     {
 //                        case l:List[String]   =>
 //                            ThesisSession.insertAlias(l.mkString(" "), false, d.filePath, Some(eId))
 //                        case ll:List[List[String]] =>
-                    ThesisSession.insertAlias(dep.mkString(" "), false, d.filePath, Some(eId))
+                    ThesisSession.insertAlias(dep.mkString(" "), false, dId, Some(eId))
 //                    }
                     println("inserted dependent alias")
                 }
             }
         }
 
+        } catch {
+            case e:Exception => println("Error on document: " + e.getMessage())
+        }
     }
 
 }
