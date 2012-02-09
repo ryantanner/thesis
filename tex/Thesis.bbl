@@ -1,0 +1,10 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Dean and Ghemawat}{Dean and
+  Ghemawat}{2008}]{Dean:2008:MSD:1327452.1327492}
+Dean, Jeffrey and Sanjay Ghemawat.
+\newblock ``MapReduce: simplified data processing on large clusters.''
+\newblock \emph{Commun. ACM}
+\newblock 51 (January 2008): 107--113.
+
+\end{thebibliography}

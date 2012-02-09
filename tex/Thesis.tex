@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+%\linespread{1.5}
+
+\usepackage{natbib}
+
+\title{Thesis}
+\author{Ryan Tanner}
+%\date{}                                           % Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+\section{Problem Statement}
+
+This thesis is an attempt to tackle the problem of extracting facts and connections from written text.  Massive quantities of text are produced daily and methods for quickly getting relevant information out of that text are needed.  There are many 
+
+\subsection{Extracting properties defined in a massively large body of text}
+
+
+
+\subsection{Doing so in a time-efficient manner}
+
+\subsection{On a textual level, the problem of finding connections across concepts and entities in a massive corpora of text}
+
+
+\section{Other Approaches}
+
+\subsection{Training oriented approaches}
+
+\subsubsection{Manually-annotated training input}
+
+\subsubsection{More accurate than my proposed solution}
+
+\subsection{Weakly-linked crowd sourcing}
+
+\section{Importance of the Problem}
+
+\subsection{The Problem of Big Data}
+
+Google alone processes over twenty petabytes of data per day \citep{Dean:2008:MSD:1327452.1327492}.
+
+\subsection{Tracing Influence}
+
+
+\section{Approach to Solving the Problem}
+
+Most approaches to this problem rely on extracting as much information as possible from a given input.  This approach comes at the problem from the opposite direction and tries to extract a little bit of information very quickly but over an extremely large input set.  
+
+\subsection{Treating grammatical dependencies as functions}
+
+This approach is based on the premise that dependency grammar relations can be treated as functions and modeled as such.  Furthermore, I hypothesize that these functions can be curried, just as in a functional language.  Every word in a sentence, save for the head, is dependent upon another word and each of these dependencies has a type.  This structure forms a tree.  By doing a depth-first traversal of this tree and recursively composing each individual dependency function into a curried function, we end with a function specific to that sentence.
+
+In this approach, dependency functions are short operations which extract properties from the given relation.  These functions take two nodes of a tree as input, the governor and the dependent.  Based on the types of the tokens in each node a partial or full property is added to the accumulator map and returned up the tree.  This map is comprised of entities mapped to properties representing pieces of information extracted from the relationship.  More about properties can be found in section~\ref{algo:properties} on page~\pageref{algo:properties}.
+
+
+
+% Something about the nature of how governors in the tree are typically the heads of clauses and not subordinate
+
+\subsection{Mapping the governors and dependents of those dependencies to textual aliases and named entities}
+
+\subsection{Reducing a set of input documents to find connections between those aliases and entities based on their common properties}
+
+\subsection{Constructing a graph of these connections where the connections form weighted vertices and entities form nodes}
+
+\subsection{Visualizing this graph}
+
+\subsection{Why a functional language?}
+
+\section{Algorithm in Detail}
+
+\subsection{Dependency Functions}
+
+The grammar dependencies used here are those described in the Stanford typed dependencies manual \cite{stanforddep}.  Currently 53 grammatical relations are defined for the English language.  Each of these has a corresponding function in this algorithm.  Though the specifics of each function differ, all follow the same simple pattern.  Dependency functions take two parameters, a governor and a dependent, and return a map of tokens to a list of properties.  Furthermore, these grammatical relations have a typed hierarchy where relations can inherit from other relations.  Each function therefore can use its supertype's own function and only add the minimum processing necessary for its specific relationship.
+
+
+\subsection{Properties}
+\label{algo:properties}
+
+
+\section{Results}
+
+\section{Future Recommendations}
+
+\appendix
+
+\section{Some Relevant NLP Concepts}
+
+\subsection{Dependency Grammars}
+
+\section{Tools Used}
+
+\section{Code Highlights}
+
+
+\pagebreak
+\bibliographystyle{mla}
+\bibliography{Thesis}  
+
+
+\end{document}  
