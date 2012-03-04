@@ -59,7 +59,7 @@ abstract class Document {
         def conMap = {
             nerFilter() map { case (ner, props) =>
                 // Making a map of tuples: (Entity stuff) -> (dependent entities, properties connecting them)
-                (resolve(ner), true) -> ((props map { p => sentences(p.quality.sent).tokens }).flatten,
+                (resolve(ner), true) -> ((props map { p => sentences(p.quality.sent).tokens }),
                   Utilities.multiFlatten((props map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } } } )))
             }
         }

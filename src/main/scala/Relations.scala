@@ -149,8 +149,11 @@ object Relations	{
 
   class abbrev extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+      /* Abbreviation */
       println("abbrev")
-      return super.apply(gov,dep)
+      val props = super.apply(gov,dep)
+
+      return add(props, gov.word, new AlternativePhrase(deb.word))
     }
   }
 
@@ -158,6 +161,8 @@ object Relations	{
 
   class advcl extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+      /* Adverbial clause modifier
+       * Not sure how to use this */
       println("advcl")
       return super.apply(gov,dep)
     }
@@ -165,8 +170,12 @@ object Relations	{
 
   class advmod extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
+      /* Adverbial modifier 
+       * Adds information to verb, very useful */
       println("advmod")
-      return super.apply(gov,dep)
+      val props = super.apply(gov,dep)
+
+      return add(props,gov.word,new IsOfType(dep.word))
     }
   }
 
@@ -192,6 +201,7 @@ object Relations	{
   class attr extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("attr")
+      /* not useful, here for pass-through purposes */
       return super.apply(gov,dep)
     }
   }
@@ -199,6 +209,7 @@ object Relations	{
   class cc extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("cc")
+      /* Not immediately useful */
       return super.apply(gov,dep)
     }
   }
@@ -206,6 +217,7 @@ object Relations	{
   class ccomp extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("ccomp")
+      /* Not useful */
       return super.apply(gov,dep)
     }
   }
@@ -213,6 +225,7 @@ object Relations	{
   class complm extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("complm")
+
       return super.apply(gov,dep)
     }
   }
@@ -227,11 +240,13 @@ object Relations	{
   class csubj extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("csubj")
-      return super.apply(gov,dep)
+      val props = super.apply(gov,dep)
+
+      return add(props, gov.word, new NounProperty(dep.word))
     }
   }
 
-  class csubjpass extends dep	{
+  class csubjpass extends csubj {
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("csubjpass")
       return super.apply(gov,dep)
@@ -241,6 +256,7 @@ object Relations	{
   class det extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("det")
+      /* Not useful, only defines things like det(man, the) */
       return super.apply(gov,dep)
     }
   }
@@ -248,13 +264,14 @@ object Relations	{
   class dobj extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("dobj")
-      return super.apply(gov,dep)
+      return add(super.apply(gov,dep), gov.word, new Subject(dep.word))
     }
   }
 
   class expl extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("expl")
+      /* not sure what to do with this */
       return super.apply(gov,dep)
     }
   }
@@ -262,6 +279,7 @@ object Relations	{
   class infmod extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("infmod")
+      /* not sure? */
       return super.apply(gov,dep)
     }
   }
@@ -269,6 +287,7 @@ object Relations	{
   class iobj extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("iobj")
+
       return super.apply(gov,dep)
     }
   }
@@ -306,6 +325,7 @@ object Relations	{
   class npadvmod extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("npadvmod")
+      /* only useful in combination with num/number, not sure how to do that */
       return super.apply(gov,dep)
     }
   }

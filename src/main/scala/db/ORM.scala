@@ -85,10 +85,11 @@ class Document(val documentPath:String) extends BaseEntity	{
 }
 
 class Sentence(val documentId: Long,
-				val sent: String) extends KeyedEntity[CompositeKey2[Long,String]] {
+			    val sent: String) extends BaseEntity {
 					
-					def id = compositeKey(documentId,sent)
 					
+    lazy val locations: OneToMany[Location] = EntityGraph.sentenceToLocations.left(this)
+
 				}
 
 class Location(val loc: String,
@@ -96,7 +97,9 @@ class Location(val loc: String,
                 val lat: Option[String],
                 val lng: Option[String]) extends KeyedEntity[CompositeKey2[String,Long]] {
 
-                def id = compositeKey(loc, sentenceId)
+    def id = compositeKey(loc, sentenceId)
+
+    lazy val sentence: ManyToOne[Sentence] = EntityGraph.sentenceToLocations.right(this)
 
 }
 
@@ -140,6 +143,9 @@ object EntityGraph extends Schema	{
 															  d.id === dm.documentId))
 	
     val locations = table[Location]
+
+    val sentenceToLocations = oneToManyRelation(sentences, locations).
+                                via((s,l) => s.id === l.sentenceId)
 
 	on(entities)(e => declare(
 		e.id is(unique,autoIncremented),

@@ -1,30 +1,33 @@
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Problem Statement}{1}
-\contentsline {subsection}{\numberline {2.1}Extracting properties defined in a massively large body of text}{1}
-\contentsline {subsection}{\numberline {2.2}Doing so in a time-efficient manner}{1}
-\contentsline {subsection}{\numberline {2.3}On a textual level, the problem of finding connections across concepts and entities in a massive corpora of text}{1}
-\contentsline {section}{\numberline {3}Other Approaches}{1}
-\contentsline {subsection}{\numberline {3.1}Training oriented approaches}{1}
-\contentsline {subsubsection}{\numberline {3.1.1}Manually-annotated training input}{1}
-\contentsline {subsubsection}{\numberline {3.1.2}More accurate than my proposed solution}{1}
-\contentsline {subsection}{\numberline {3.2}Weakly-linked crowd sourcing}{1}
-\contentsline {section}{\numberline {4}Importance of the Problem}{1}
-\contentsline {subsection}{\numberline {4.1}The Problem of Big Data}{1}
-\contentsline {subsection}{\numberline {4.2}Tracing Influence}{2}
-\contentsline {section}{\numberline {5}Approach to Solving the Problem}{2}
-\contentsline {subsection}{\numberline {5.1}Treating grammatical dependencies as functions}{2}
-\contentsline {subsection}{\numberline {5.2}Mapping the governors and dependents of those dependencies to textual aliases and named entities}{2}
-\contentsline {subsection}{\numberline {5.3}Reducing a set of input documents to find connections between those aliases and entities based on their common properties}{2}
-\contentsline {subsection}{\numberline {5.4}Constructing a graph of these connections where the connections form weighted vertices and entities form nodes}{2}
-\contentsline {subsection}{\numberline {5.5}Visualizing this graph}{2}
-\contentsline {subsection}{\numberline {5.6}Why a functional language?}{2}
-\contentsline {section}{\numberline {6}Algorithm in Detail}{2}
-\contentsline {subsection}{\numberline {6.1}Dependency Functions}{2}
-\contentsline {subsection}{\numberline {6.2}Properties}{3}
-\contentsline {subsubsection}{\numberline {6.2.1}Full vs. Partial Properties}{3}
-\contentsline {section}{\numberline {7}Results}{3}
-\contentsline {section}{\numberline {8}Future Recommendations}{3}
-\contentsline {section}{\numberline {A}Some Relevant NLP Concepts}{3}
-\contentsline {subsection}{\numberline {A.1}Dependency Grammars}{3}
-\contentsline {section}{\numberline {B}Tools Used}{3}
-\contentsline {section}{\numberline {C}Code Highlights}{3}
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}Problem Statement}{2}
+\contentsline {subsection}{\numberline {2.1}Extracting properties defined in a massively large body of text}{2}
+\contentsline {subsection}{\numberline {2.2}Doing so in a time-efficient manner}{2}
+\contentsline {subsection}{\numberline {2.3}On a textual level, the problem of finding connections across concepts and entities in a massive corpora of text}{2}
+\contentsline {subsection}{\numberline {2.4}Motivation}{2}
+\contentsline {section}{\numberline {3}Other Approaches}{3}
+\contentsline {subsection}{\numberline {3.1}Training oriented approaches}{3}
+\contentsline {subsubsection}{\numberline {3.1.1}Manually-annotated training input}{3}
+\contentsline {subsubsection}{\numberline {3.1.2}More accurate than my proposed solution}{3}
+\contentsline {subsection}{\numberline {3.2}Weakly-linked crowd sourcing}{3}
+\contentsline {section}{\numberline {4}Importance of the Problem}{3}
+\contentsline {subsection}{\numberline {4.1}The Problem of Big Data}{3}
+\contentsline {subsection}{\numberline {4.2}Tracing Influence}{3}
+\contentsline {section}{\numberline {5}Approach to Solving the Problem}{3}
+\contentsline {subsection}{\numberline {5.1}Treating grammatical dependencies as functions}{3}
+\contentsline {subsection}{\numberline {5.2}Mapping the governors and dependents of those dependencies to textual aliases and named entities}{4}
+\contentsline {subsection}{\numberline {5.3}Reducing a set of input documents to find connections between those aliases and entities based on their common properties}{4}
+\contentsline {subsection}{\numberline {5.4}Constructing a graph of these connections where the connections form weighted vertices and entities form nodes}{4}
+\contentsline {subsection}{\numberline {5.5}Visualizing this graph}{4}
+\contentsline {subsection}{\numberline {5.6}Why a functional language?}{4}
+\contentsline {section}{\numberline {6}Algorithm in Detail}{4}
+\contentsline {subsection}{\numberline {6.1}Dependency Functions}{4}
+\contentsline {subsection}{\numberline {6.2}Properties}{5}
+\contentsline {subsubsection}{\numberline {6.2.1}Full vs. Partial Properties}{5}
+\contentsline {section}{\numberline {7}Input Data}{6}
+\contentsline {section}{\numberline {8}Results}{6}
+\contentsline {section}{\numberline {9}Future Recommendations}{6}
+\contentsline {section}{\numberline {A}Some Relevant NLP Concepts}{6}
+\contentsline {subsection}{\numberline {A.1}Dependency Grammars}{6}
+\contentsline {subsection}{\numberline {A.2}Why dependency grammars?}{7}
+\contentsline {section}{\numberline {B}Tools Used}{8}
+\contentsline {section}{\numberline {C}Code Highlights}{8}

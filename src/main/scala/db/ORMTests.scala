@@ -62,7 +62,9 @@ object ORMTests     {
                 deps._1 match {
                     case Nil => {}
                     case d :: tail =>
-                        ThesisSession.insertProperty(deps._1.tail.mkString(" "), eId);
+                        deps._1 map { tokenList =>
+                          ThesisSession.insertProperty(tokenList.tail.mkString(" "), eId);
+                        }
                         println("Inserted property")
                 }
                 println(deps._2)
@@ -74,7 +76,7 @@ object ORMTests     {
 //                        case l:List[String]   =>
 //                            ThesisSession.insertAlias(l.mkString(" "), false, d.filePath, Some(eId))
 //                        case ll:List[List[String]] =>
-                    ThesisSession.insertAlias(dep.mkString(" "), false, dId, Some(eId))
+                    ThesisSession.insertAlias(dep, false, dId, Some(eId))
 //                    }
                     println("inserted dependent alias")
                 }

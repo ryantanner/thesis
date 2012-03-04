@@ -5,6 +5,7 @@ import org.squeryl.SessionFactory
 import org.squeryl.adapters.PostgreSqlAdapter
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Query
+import org.squeryl.dsl._
 
 object ThesisSession	{
 	val dbUser = "thesis"
@@ -40,9 +41,8 @@ object ThesisSession	{
 
     def insertSentence(s: thesis.Sentence, dId: Long): Long = {
         val sent = s.tokens.mkString(" ")
-        val newS = new Sentence(dId, sent)
-        EntityGraph.sentences.insert(newS)
-        return newS.id.a1
+        val newS = EntityGraph.sentences.insert(new Sentence(dId, sent))
+        return newS.id
     }
 
     def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long]): Long = {
@@ -57,10 +57,11 @@ object ThesisSession	{
         return d
     }
 
-    def insertProperty(value: String, entityId: Long): Long = {
-        val prop = new Property(value, entityId)
-        EntityGraph.properties.insert(prop)
-        return prop.id.a2
+    def insertProperty(value: String, entityId: Long) = {
+        if(EntityGraph.properties.lookup(new CompositeKey2(value,entityId)).isEmpty) {
+            val prop = new Property(value, entityId)
+            EntityGraph.properties.insert(prop)
+        }
     }
 
     def insertQuality(pId: Long, key: String, qual: String, strength: Int) = {
@@ -69,8 +70,10 @@ object ThesisSession	{
     }
 
     def insertLocation(loc: String, sId: Long) = {
-        val l = new Location(loc, sId, None, None)
-        EntityGraph.locations.insert(l)
+        if(EntityGraph.locations.lookup(new CompositeKey2(loc, sId)).isEmpty)    {
+            val l = new Location(loc, sId, None, None)
+            EntityGraph.locations.insert(l)
+        }
     }
 
     def insertLocation(loc: String, sId: Long, lat: String, lng: String) = {
@@ -78,8 +81,8 @@ object ThesisSession	{
         EntityGraph.locations.insert(l)
     }
 
-    def insertConnection(propId: Long, govId: Long, depId: Long, strength: Int = 0) = {
-        
+    def insertConnection(propId: Long, govId: Long, depId: Long, strength: Int) = {
+        EntityGraph.connections.insert(new Connection(propId, govId, depId, strength))
     }
 
 
