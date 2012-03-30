@@ -11,7 +11,8 @@
 %\linespread{1.5}
 
 \usepackage{natbib}
-
+\usepackage{setspace}
+\doublespace
 
 \usepackage{listings}
  
@@ -144,12 +145,12 @@ In order to connect entities which appear in separate documents, a simple string
 
 The grammar dependencies used here are those described in the Stanford typed dependencies manual \cite{stanforddep}.  Currently 53 grammatical relations are defined for the English language.  Each of these has a corresponding function in this algorithm.  Though the specifics of each function differ, all follow the same simple pattern.  Dependency functions take two parameters, a governor and a dependent, and return a map of tokens to a list of properties.  Furthermore, these grammatical relations have a typed hierarchy where relations can inherit from other relations.  Each function therefore can use its supertype's own function and only add the minimum processing necessary for its specific relationship.
 
-These functions use the part-of-speech tags of the tokens in the governor and dependent to loosely determine if a full or partial property is defined by this relationship.
+%These functions use the part-of-speech tags of the tokens in the governor and dependent to loosely determine if a full or partial property is defined by this relationship. % How?
 
 These functions were arrived at by first considering their meaning in the context of English grammar and their definitions within the Stanford parser and then through a process of trial-and-error.  An example follows: 
 
 \begin{lstlisting}
-class nsubj extends dep	{
+class nsubj extends subj	{
   override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
     val props = super.apply(gov,dep)
 
@@ -176,6 +177,10 @@ class nsubj extends dep	{
 This example handles nominal subject relationships (``nsubj''), a ``noun phrase which is the syntactic subject of a clause'' (stanford).  An example is the sentence ``Clinton defeated Dole'' in which ``defeated'' governs ``Clinton.''  This function adds ``Clinton'' adds ``defeated'' as a property of ``Clinton''.  
 
 We will now trace this function step by step.
+
+Line 1 shows the inheritance relationship of $nsubj$ to $subj$, the supertype, utilized in line 3 where the $gov$ and $dep$ are first processed by $subj$ and its supertypes returning a map consisting of key-value pairs in which the key is an entity found in this relationship and the value is a list of properties of that entity.  
+
+Note that this algorithm is head-recursive: every relationship function ultimately extends $dep$ which calls the relationship functions stored by the dependent.  In effect this is a depth-first traversal of the dependency tree representing a given sentence.  A depth-first search was chosen 
 
 \subsection{Function Inheritance}
 

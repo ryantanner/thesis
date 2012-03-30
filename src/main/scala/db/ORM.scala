@@ -15,13 +15,17 @@ class BaseEntity extends KeyedEntity[Long]	{
 class Entity(val value: String,
 			 val location: Option[String],
              val representative: Boolean,
-             val master: Option[Long]) extends BaseEntity	{
+             val master: Option[Long],
+             val sentenceId: Long,
+             val keyId: Long) extends BaseEntity	{
 				
     // master is the id in this same table of the representative alias of a dependent alias
 
-	def this() = this("",Some(""),false, Some(0L))
+	def this() = this("",Some(""),false, Some(0L), 0L, 0L)
 
 	lazy val properties: OneToMany[Property] = EntityGraph.propertiesOfEntities.left(this)
+
+    lazy val key: ManyToOne[EntityKey] = EntityGraph.keysToEntities.right(this)
 	
 	//lazy val connectedEntities = EntityGraph.propertiesOfEntities.left(this)
 				
@@ -85,7 +89,8 @@ class Document(val documentPath:String) extends BaseEntity	{
 }
 
 class Sentence(val documentId: Long,
-			    val sent: String) extends BaseEntity {
+			   val sent: String,
+               val outputId: Long) extends BaseEntity {
 					
 					
     lazy val locations: OneToMany[Location] = EntityGraph.sentenceToLocations.left(this)
@@ -103,6 +108,11 @@ class Location(val loc: String,
 
 }
 
+class EntityKey(val value: String) extends BaseEntity  {
+
+    lazy val entities: OneToMany[Entity] = EntityGraph.keysToEntities.left(this)
+
+}
 
 
 				
@@ -137,6 +147,7 @@ object EntityGraph extends Schema	{
 								via((d,s) => (
 									d.id === s.documentId
 								))
+    
 
 	val entitiesFromDocs = manyToManyRelation(entities,documents).
 							via[DocumentMatches]((e,d,dm) => (e.id === dm.entityId,
@@ -146,6 +157,11 @@ object EntityGraph extends Schema	{
 
     val sentenceToLocations = oneToManyRelation(sentences, locations).
                                 via((s,l) => s.id === l.sentenceId)
+
+    val entityKeys = table[EntityKey]
+
+    val keysToEntities = oneToManyRelation(entityKeys, entities).
+                            via((ek,e) => ek.id === e.keyId)
 
 	on(entities)(e => declare(
 		e.id is(unique,autoIncremented),
@@ -171,7 +187,8 @@ object EntityGraph extends Schema	{
     ))
 
     on(sentences)(s => declare(
-      s.sent is (dbType("text"))
+      s.sent is (dbType("text")),
+      s.id is(autoIncremented)
     ))
 	
 	

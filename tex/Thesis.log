@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.4.13)  26 FEB 2012 13:24
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.4.13)  12 MAR 2012 23:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -140,7 +140,11 @@ Package: natbib 2009/11/07 8.31a (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count91
 )
-(/usr/local/texlive/2010basic/texmf-dist/tex/latex/listings/listings.sty
+(/usr/local/texlive/2010basic/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
+
+Package: `setspace' 6.7 <2000/12/01>
+) (/usr/local/texlive/2010basic/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count92
 \lst@gtempboxa=\box26
 \lst@token=\toks17
@@ -176,18 +180,18 @@ Package color Info: Driver file: pdftex.def on input line 130.
 (./Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -237,51 +241,59 @@ LaTeX Font Info:    ... okay on input line 64.
 \everyMPtoPDFconversion=\toks19
 )
 \c@lstlisting=\count105
-LaTeX Font Info:    Try loading font information for U+msa on input line 65.
+LaTeX Font Info:    Try loading font information for U+msa on input line 66.
  (/usr/local/texlive/2010basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 65.
+LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/local/texlive/2010basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-(./Thesis.toc
+(./Thesis.toc [1
+
+{/usr/local/texlive/2010basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Overfull \hbox (10.36853pt too wide) in paragraph at lines 19--19
  [][] []\OT1/cmr/m/n/10.95 Constructing a graph of these con-nec-tions where th
 e con-nec-tions form weighted 
  []
 
-[1
-
-{/usr/local/texlive/2010basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+[2])
 \tf@toc=\write3
 \openout3 = `Thesis.toc'.
 
-[2]
+ [3]
 
-Package natbib Warning: Citation `Dean:2008:MSD:1327452.1327492' on page 3 unde
-fined on input line 106.
+Package natbib Warning: Citation `Dean:2008:MSD:1327452.1327492' on page 4 unde
+fined on input line 107.
 
-[3]
+[4] [5]
 
-Package natbib Warning: Citation `stanforddep' on page 4 undefined on input lin
-e 145.
+Package natbib Warning: Citation `stanforddep' on page 6 undefined on input lin
+e 146.
 
-[4] [5] [6] [7] [8]
+[6] [7] [8] [9] [10] [11] [12]
 No file Thesis.bbl.
 
 Package natbib Warning: There were undefined citations.
 
-(./Thesis.aux) ) 
+(./Thesis.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 15 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 3744 strings out of 494749
- 52535 string characters out of 3170619
- 141198 words of memory out of 3000000
- 6917 multiletter control sequences out of 15000+200000
+ 3777 strings out of 494749
+ 53157 string characters out of 3170619
+ 142060 words of memory out of 3000000
+ 6946 multiletter control sequences out of 15000+200000
  11866 words of font info for 45 fonts, out of 3000000 for 9000
  166 hyphenation exceptions out of 8191
- 41i,6n,40p,746b,1023s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,6n,40p,746b,2235s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2010basic/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx10.pfb></usr/local/texlive/2010basic/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb></usr/local/texlive/2010basic/texmf-dist/fonts/type1/pu
@@ -296,10 +308,10 @@ ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2010basic/texmf
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2010bas
 ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/201
 0basic/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (8 pages, 164683 bytes).
+Output written on Thesis.pdf (12 pages, 167413 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 95 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

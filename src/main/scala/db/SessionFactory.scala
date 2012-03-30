@@ -2,22 +2,22 @@ package thesis.db
 
 import org.squeryl.Session
 import org.squeryl.SessionFactory
-import org.squeryl.adapters.PostgreSqlAdapter
+import org.squeryl.adapters.MySqlDriver
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Query
 import org.squeryl.dsl._
 
 object ThesisSession	{
-	val dbUser = "thesis"
-	val dbPass = "retanner"
-	val dbConn = "jdbc:postgresql://sparky.ryantanner.org/thesis"
+	val dbUser = "root"
+	val dbPass = ""
+	val dbConn = "jdbc:mysql://localhost/thesis2"
 	
 	def startDbSession():Unit = {
         if(!Session.hasCurrentSession)  {
-          Class.forName("org.postgresql.Driver")
+          Class.forName("com.mysql.jdbc.Driver")
           SessionFactory.concreteFactory = Some(() => Session.create(
               java.sql.DriverManager.getConnection(dbConn,dbUser,dbPass),
-              new PostgreSqlAdapter)
+              new MySqlDriver)
 		    )
         }
 	}
@@ -41,15 +41,38 @@ object ThesisSession	{
 
     def insertSentence(s: thesis.Sentence, dId: Long): Long = {
         val sent = s.tokens.mkString(" ")
-        val newS = EntityGraph.sentences.insert(new Sentence(dId, sent))
+        val newS = EntityGraph.sentences.insert(new Sentence(dId, sent, s.id))
         return newS.id
     }
 
-    def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long]): Long = {
-        val newEnt = EntityGraph.entities.insert(new Entity(entityValue, None, representative, masterId))
+    def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long], sentenceId: Long): Long = {
+
+        val keyId = key(entityValue) match {
+          case Some(key) => key
+          case None => insertKey(entityValue).id 
+        }
+
+        val newEnt = EntityGraph.entities.insert(new Entity(entityValue, None, representative, masterId, sentenceId, keyId))
         EntityGraph.entitiesFromDocs.insert(new DocumentMatches(newEnt.id, docId))
       println("New entity inserted")
       return newEnt.id
+    }
+
+    def insertKey(value: String): EntityKey =    {
+        
+        val newKey = EntityGraph.entityKeys.insert(new EntityKey(value))
+        return newKey
+
+    }
+
+    def key(value: String): Option[Long] = {
+        
+        val qKey = from(EntityGraph.entityKeys)(ek => where(ek.value === value) select(ek))
+        if(qKey.isEmpty)
+            None
+        else
+            Option(qKey.head.id)
+        
     }
 
     def getDocumentId(fp: String): Query[Long] = {

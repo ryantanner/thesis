@@ -54,7 +54,7 @@ object ORMTests     {
             d.conMap foreach { case (rep, deps) =>
 
                 println(rep._1)
-                val eId = ThesisSession.insertAlias(rep._1, true, dId, None)
+                val eId = ThesisSession.insertAlias(rep._1, true, dId, None, rep._3)
 
                 println("Inserted master alias")
                 println(rep._1)
@@ -76,7 +76,7 @@ object ORMTests     {
 //                        case l:List[String]   =>
 //                            ThesisSession.insertAlias(l.mkString(" "), false, d.filePath, Some(eId))
 //                        case ll:List[List[String]] =>
-                    ThesisSession.insertAlias(dep, false, dId, Some(eId))
+                    ThesisSession.insertAlias(dep, false, dId, Some(eId), rep._3)
 //                    }
                     println("inserted dependent alias")
                 }

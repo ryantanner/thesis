@@ -153,7 +153,7 @@ object Relations	{
       println("abbrev")
       val props = super.apply(gov,dep)
 
-      return add(props, gov.word, new AlternativePhrase(deb.word))
+      return add(props, gov.word, new AlternativePhrase(dep.word))
     }
   }
 
@@ -264,7 +264,7 @@ object Relations	{
   class dobj extends dep	{
     override def apply(gov: ParseTreeNode, dep: ParseTreeNode): Map[Token,List[Property]] = {
       println("dobj")
-      return add(super.apply(gov,dep), gov.word, new Subject(dep.word))
+      return add(super.apply(gov,dep), gov.word, new Subject(new NounProperty(dep.word)))
     }
   }
 
