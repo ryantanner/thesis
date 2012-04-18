@@ -24,7 +24,7 @@ object Main {
 
 		val sent = Sentence.fromXML(loadFile)
 
-		println(sent)
+		//println(sent)
 		return sent
 	}
 

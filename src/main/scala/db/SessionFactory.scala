@@ -2,59 +2,61 @@ package thesis.db
 
 import org.squeryl.Session
 import org.squeryl.SessionFactory
-import org.squeryl.adapters.MySqlDriver
+import org.squeryl.adapters.PostgreSqlAdapter
+import org.squeryl.adapters.MySQLAdapter
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Query
 import org.squeryl.dsl._
+import java.io.File
 
 object ThesisSession	{
 	val dbUser = "root"
 	val dbPass = ""
-	val dbConn = "jdbc:mysql://localhost/thesis2"
+	val dbConn = "jdbc:mysql://127.0.0.1/thesispar2"
 	
 	def startDbSession():Unit = {
         if(!Session.hasCurrentSession)  {
           Class.forName("com.mysql.jdbc.Driver")
           SessionFactory.concreteFactory = Some(() => Session.create(
               java.sql.DriverManager.getConnection(dbConn,dbUser,dbPass),
-              new MySqlDriver)
+              new MySQLAdapter)
 		    )
         }
 	}
-
+    
 	def initSchema = {
 
 		startDbSession()
 
 		transaction {
 			EntityGraph.create
-			println("Created the schema")
+			//println("Created the schema")
 		}
 	}
 	
 	def insertDocument(d: thesis.Document): Long = { 
         val ret = EntityGraph.documents.insert(new thesis.db.Document(d.filePath))
-        println("Inserted document: " + d.filePath)
+        //println("Inserted document: " + d.filePath)
         //return retDoc.id
         return ret.id
     }
 
     def insertSentence(s: thesis.Sentence, dId: Long): Long = {
-        val sent = s.tokens.mkString(" ")
+        val sent = s.tokens.mkString(" ").replace("-LRB- ","[").replace(" -RRB-","]")
         val newS = EntityGraph.sentences.insert(new Sentence(dId, sent, s.id))
         return newS.id
     }
 
-    def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long], sentenceId: Long): Long = {
+    def insertAlias(entityValue: String, representative: Boolean, docId: Long, masterId: Option[Long], sentenceId: Long, documentId: Long): Long = {
 
         val keyId = key(entityValue) match {
           case Some(key) => key
           case None => insertKey(entityValue).id 
         }
 
-        val newEnt = EntityGraph.entities.insert(new Entity(entityValue, None, representative, masterId, sentenceId, keyId))
+        val newEnt = EntityGraph.entities.insert(new Entity(entityValue, None, representative, masterId, sentenceId, keyId, documentId))
         EntityGraph.entitiesFromDocs.insert(new DocumentMatches(newEnt.id, docId))
-      println("New entity inserted")
+      //println("New entity inserted")
       return newEnt.id
     }
 
@@ -81,10 +83,8 @@ object ThesisSession	{
     }
 
     def insertProperty(value: String, entityId: Long) = {
-        if(EntityGraph.properties.lookup(new CompositeKey2(value,entityId)).isEmpty) {
             val prop = new Property(value, entityId)
             EntityGraph.properties.insert(prop)
-        }
     }
 
     def insertQuality(pId: Long, key: String, qual: String, strength: Int) = {

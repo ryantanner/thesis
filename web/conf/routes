@@ -8,7 +8,9 @@ GET     /                           controllers.Application.index
 # entities list (look at the default values for pagination parameters)
 GET     /entities                   controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f ?= "")
 
-GET     /connections/:id                controllers.Application.sentenceConnections(p:Int ?= 0, s:Int ?= 2, id: Long)
+GET     /connections/:id            controllers.Application.sentenceConnections(p:Int ?= 0, s:Int ?= 2, id: Long)
+
+GET     /sentsToEnts/:id            controllers.Application.sentToEnts(p:Int ?= 0, s:Int ?= 2, id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

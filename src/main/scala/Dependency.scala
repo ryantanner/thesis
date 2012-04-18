@@ -26,6 +26,6 @@ object Dependency	{
 		val dep = nodes.getOrElse((node \ "dependent" \ "@idx").text.toInt,null)
 		val relType = (node \ "@type") text
 		val relFunc = Relations.handler(relType)
-		println(relType)
+		//println(relType)
     }
 }

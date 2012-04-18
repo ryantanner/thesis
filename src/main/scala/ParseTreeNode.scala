@@ -110,7 +110,7 @@ object ParseTreeNode	{
      for (t <- 1 to i)
       s append "\t"
      s append ptn.toString
-     println(s)
+     //println(s)
      ptn.childs map { print_i(_,i+1) }
      return i
   }

@@ -10,7 +10,7 @@ import thesis._
 
 object ORMTests     {
 
-    def main(args: Array[String])   {
+/*    def main(args: Array[String])   {
         // Get some sample data
 
         val d = Document.fromFile()
@@ -18,11 +18,15 @@ object ORMTests     {
         ThesisSession.startDbSession()
         insertAllFromDocument(d)
     }
+    */
 
     def insertAllFromDocument(d: thesis.Document)  {
         var dId:Long = 0
         try {
         transaction {
+            
+            if(ThesisSession.getDocumentId(d.filePath).head == 0) return
+
             // Insert aliases
 /*
             d.aliases foreach { case (rep, deps) =>
@@ -50,25 +54,25 @@ object ORMTests     {
                   }
             
             }
-            println("Inserted sentences and locations")
-            d.conMap foreach { case (rep, deps) =>
+            //println("Inserted sentences and locations")
+            d.conMap foreach { case (rep, deps, docId) =>
 
-                println(rep._1)
-                val eId = ThesisSession.insertAlias(rep._1, true, dId, None, rep._3)
+                //println(rep._1)
+                val eId = ThesisSession.insertAlias(rep._1, true, dId, None, rep._3, docId)
 
-                println("Inserted master alias")
-                println(rep._1)
-                println(deps._1)
+                //println("Inserted master alias")
+                //println(rep._1)
+                //println(deps._1)
                 deps._1 match {
                     case Nil => {}
                     case d :: tail =>
                         deps._1 map { tokenList =>
                           ThesisSession.insertProperty(tokenList.tail.mkString(" "), eId);
                         }
-                        println("Inserted property")
+                        //println("Inserted property")
                 }
-                println(deps._2)
-                println(deps._2.getClass)
+                //println(deps._2)
+                //println(deps._2.getClass)
                 deps._2.asInstanceOf[List[String]] foreach { dep =>
 //                    dep match {
 //                        case s:String => 
@@ -76,15 +80,15 @@ object ORMTests     {
 //                        case l:List[String]   =>
 //                            ThesisSession.insertAlias(l.mkString(" "), false, d.filePath, Some(eId))
 //                        case ll:List[List[String]] =>
-                    ThesisSession.insertAlias(dep, false, dId, Some(eId), rep._3)
+                    ThesisSession.insertAlias(dep, false, dId, Some(eId), rep._3, docId)
 //                    }
-                    println("inserted dependent alias")
+                    //println("inserted dependent alias")
                 }
             }
         }
 
         } catch {
-            case e:Exception => println("Error on document: " + e.getMessage())
+            case e:Exception => //println("Error on document: " + e.getMessage())
         }
     }
 

@@ -16,4 +16,6 @@ libraryDependencies ++= Seq(
     "postgresql" % "postgresql" % "8.4-701.jdbc4"
 )
 
-
+libraryDependencies ++= Seq(
+    "mysql" % "mysql-connector-java" % "5.1.10"
+)

@@ -17,11 +17,12 @@ class Entity(val value: String,
              val representative: Boolean,
              val master: Option[Long],
              val sentenceId: Long,
-             val keyId: Long) extends BaseEntity	{
+             val keyId: Long,
+             val documentId: Long) extends BaseEntity	{
 				
     // master is the id in this same table of the representative alias of a dependent alias
 
-	def this() = this("",Some(""),false, Some(0L), 0L, 0L)
+	def this() = this("",Some(""),false, Some(0L), 0L, 0L, 0L)
 
 	lazy val properties: OneToMany[Property] = EntityGraph.propertiesOfEntities.left(this)
 
@@ -32,9 +33,9 @@ class Entity(val value: String,
 }
 			
 class Property(val value: String,
-			val entityId: Long) extends KeyedEntity[CompositeKey2[String,Long]]	{
+			val entityId: Long) extends BaseEntity { 
 
-	def id = compositeKey(value,entityId)
+//	def id = compositeKey(value,entityId)
 
 	def this() = this("",0)
 	
@@ -52,11 +53,11 @@ class PropertiesOfEntities(val entityId: Long,
 }
 
 class PropertyQuality(val propertyId: Long,
-						val key: String,
+						val pkey: String,
 						val quality: String,
 						var strength: Int) extends KeyedEntity[CompositeKey2[Long,String]] {
 							
-							def id = compositeKey(propertyId,key)
+							def id = compositeKey(propertyId,pkey)
 							
 							def this() = this(0,"","",0)
 							
@@ -89,7 +90,7 @@ class Document(val documentPath:String) extends BaseEntity	{
 }
 
 class Sentence(val documentId: Long,
-			   val sent: String,
+			    val sent: String,
                val outputId: Long) extends BaseEntity {
 					
 					
@@ -164,13 +165,13 @@ object EntityGraph extends Schema	{
                             via((ek,e) => ek.id === e.keyId)
 
 	on(entities)(e => declare(
-		e.id is(unique,autoIncremented),
-        e.value is (indexed, dbType("text")),
+		e.id is(primaryKey,unique,autoIncremented),
+        e.value is (dbType("TEXT")),
         e.location is (indexed)
 	))
 	
 	on(properties)(p => declare(
-		p.value is(indexed, dbType("text"))
+		p.value is(dbType("text"))
 	))
 	
 	on(connections)(c => declare(
@@ -178,7 +179,7 @@ object EntityGraph extends Schema	{
 	))
 	
 	on(qualitiesOfProperties)(q => declare(
-		columns(q.key,q.quality) are(indexed)
+		columns(q.pkey,q.quality) are(indexed)
 	))
 
     on(locations)(l => declare(
@@ -191,5 +192,9 @@ object EntityGraph extends Schema	{
       s.id is(autoIncremented)
     ))
 	
+    on(entityKeys)(ek => declare(
+        ek.value is(dbType("text"))
+    ))
+
 	
 }

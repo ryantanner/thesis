@@ -13,6 +13,7 @@ abstract class Document {
 	val sentences: List[Sentence]
 	val aliases: Map[Alias,List[Alias]]
 	val filePath: String
+    val id: Long
 
 	def resolve(alias:Alias): String = {
 		return sentences(alias.sentence-1).tokens.slice(alias.start,alias.end).mkString(" ")
@@ -59,8 +60,8 @@ abstract class Document {
         def conMap = {
             nerFilter() map { case (ner, props) =>
                 // Making a map of tuples: (Entity stuff) -> (dependent entities, properties connecting them)
-                (resolve(ner), true, ner.sentence) -> ((props map { p => sentences(p.quality.sent).tokens }),
-                  Utilities.multiFlatten((props map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } } } )))
+                ((resolve(ner), true, ner.sentence),((props map { p => sentences(p.quality.sent).tokens }),
+                  Utilities.multiFlatten((props map { p => aliases.values.toList map { _ filter { _.sentence == p.quality.sent } } filter { _.size > 0 } map { _ map { resolve(_) } } } ))),id)
             }
         }
 		
@@ -82,6 +83,8 @@ abstract class Document {
 
 object Document {
 
+    var nextId = 0L
+
 	def fromXML(node: xml.NodeSeq, fileName: String): Document = {
 		return new Document {
 			val sentences = ((node \ "document" \ "sentences" \\  "sentence") map { s => Sentence
@@ -92,6 +95,10 @@ object Document {
 					(0)) -> (l filter { _.representative == false } toList)})
 			
             val filePath = fileName       
+
+            val id = nextId
+
+            nextId = nextId + 1
 		}
 	}
         
