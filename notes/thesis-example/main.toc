@@ -1,0 +1,49 @@
+\select@language {english}
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Problem Statement}{3}
+\contentsline {section}{\numberline {2.1}Extracting properties defined in a massively large body of text}{4}
+\contentsline {section}{\numberline {2.2}Motivation}{5}
+\contentsline {chapter}{\numberline {3}Other Approaches}{6}
+\contentsline {section}{\numberline {3.1}Semantic Web}{6}
+\contentsline {section}{\numberline {3.2}Other NLP Work with Wikipedia}{7}
+\contentsline {section}{\numberline {3.3}Information Extraction with Dependency Grammars}{8}
+\contentsline {chapter}{\numberline {4}Importance of the Problem}{10}
+\contentsline {chapter}{\numberline {5}Approach to Solving the Problem}{12}
+\contentsline {section}{\numberline {5.1}Treating grammatical dependencies as functions}{12}
+\contentsline {section}{\numberline {5.2}Mapping the governors and dependents of those dependencies to textual aliases and named entities}{13}
+\contentsline {section}{\numberline {5.3}Reducing a set of input documents to find connections between those aliases and entities based on their common properties}{14}
+\contentsline {section}{\numberline {5.4}Visualizing this graph}{14}
+\contentsline {section}{\numberline {5.5}Why a functional language?}{14}
+\contentsline {chapter}{\numberline {6}The Process}{16}
+\contentsline {section}{\numberline {6.1}Importing from Wikipedia}{16}
+\contentsline {section}{\numberline {6.2}Stripping Wiki markup}{17}
+\contentsline {section}{\numberline {6.3}Parsing using the Stanford Library}{18}
+\contentsline {subsection}{\numberline {6.3.1}Distributing this task across a set of machines}{24}
+\contentsline {section}{\numberline {6.4}Parsing Stanford output}{27}
+\contentsline {section}{\numberline {6.5}Structuring Graph Storage}{28}
+\contentsline {section}{\numberline {6.6}Traversing the Graph and Producing Output}{30}
+\contentsline {chapter}{\numberline {7}Algorithm in Detail}{33}
+\contentsline {section}{\numberline {7.1}Dependency Functions}{33}
+\contentsline {subsection}{\numberline {7.1.1}Function Inheritance}{35}
+\contentsline {section}{\numberline {7.2}Properties}{36}
+\contentsline {subsection}{\numberline {7.2.1}Full vs. Partial Properties}{37}
+\contentsline {section}{\numberline {7.3}Compiling Connections from a Document}{37}
+\contentsline {chapter}{\numberline {8}Input Data}{39}
+\contentsline {section}{\numberline {8.1}Difficulties Parsing Wikipedia}{40}
+\contentsline {section}{\numberline {8.2}World War II}{42}
+\contentsline {chapter}{\numberline {9}Difficulties}{43}
+\contentsline {section}{\numberline {9.1}Parallelization}{43}
+\contentsline {section}{\numberline {9.2}Sparseness}{44}
+\contentsline {chapter}{\numberline {10}Results}{45}
+\contentsline {section}{\numberline {10.1}Example Output}{45}
+\contentsline {section}{\numberline {10.2}False Positive Examples}{48}
+\contentsline {chapter}{\numberline {11}Future Recommendations}{50}
+\contentsline {section}{\numberline {11.1}Higher Order Dependency Relations}{50}
+\contentsline {section}{\numberline {11.2}Using the Simple English Wikipedia}{51}
+\contentsline {section}{\numberline {11.3}Machine Learning}{51}
+\contentsline {section}{\numberline {11.4}A Probabilistic Approach}{51}
+\contentsline {chapter}{\numberline {A}Some Relevant NLP Concepts}{53}
+\contentsline {section}{\numberline {A.1}Dependency Grammars}{53}
+\contentsline {section}{\numberline {A.2}Why dependency grammars?}{54}
+\contentsline {chapter}{\numberline {B}Tools Used}{56}

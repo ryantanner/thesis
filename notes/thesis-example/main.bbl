@@ -1,0 +1,162 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\def\UrlFont{\rmfamily}
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{nlpbook}
+D.~Jurafsky and J.~H. Martin, \emph{Speech and Natural Language
+  Processing}.\hskip 1em plus 0.5em minus 0.4em\relax Prentice Hill, 2000.
+
+\bibitem{wikiviz}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{http://www.chrisharrison.net/projects/wikiviz/index.html}
+\BIBentrySTDinterwordspacing
+
+\bibitem{RN25892292820090101}
+\BIBentryALTinterwordspacing
+C.~Bizer, T.~Heath, and T.~Berners-Lee, ``Linked data - the story so far.''
+  \emph{INTERNATIONAL JOURNAL ON SEMANTIC WEB AND INFORMATION SYSTEMS}, vol.~5,
+  no.~3, pp. 1 -- 22, 2009. [Online]. Available:
+  \url{http://libproxy.trinity.edu:80/login?url=http://search.ebscohost.com/login.aspx?direct=true&db=edsbl&AN=RN258922928&site=eds-live}
+\BIBentrySTDinterwordspacing
+
+\bibitem{semweb}
+T.~Segaran, C.~Evans, and J.~Taylor, \emph{Programming the Semantic Web}.\hskip
+  1em plus 0.5em minus 0.4em\relax O'Reilly Media, 2009.
+
+\bibitem{textrib}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://www.texastribune.org/about/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{texjour}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{https://www.google.com/fusiontables/DataSource?docid=1vNWCU2E3aW-QaW7WW2_KpeKygE4a6gELMXkTmg}
+\BIBentrySTDinterwordspacing
+
+\bibitem{texjour1}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{http://www.texastribune.org/texas-mexico-border-news/texas-mexico-border/despite-murdered-reporters-mexican-paper-goes-on/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Ruiz-casado05automaticassignment}
+M.~Ruiz-casado, E.~Alfonseca, and P.~Castells, ``Automatic assignment of
+  wikipedia encyclopedic entries to wordnet synsets,'' in \emph{In: Proceedings
+  of the Atlantic Web Intelligence Conference, AWIC-2005. Volume 3528 of
+  Lecture Notes in Computer Science}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Springer Verlag, 2005, pp. 380--386.
+
+\bibitem{Muller:2008:UWW:1813809.1813844}
+\BIBentryALTinterwordspacing
+C.~M\"{u}ller and I.~Gurevych, ``Using wikipedia and wiktionary in
+  domain-specific information retrieval,'' in \emph{Proceedings of the 9th
+  Cross-language evaluation forum conference on Evaluating systems for
+  multilingual and multimodal information access}, ser. CLEF'08.\hskip 1em plus
+  0.5em minus 0.4em\relax Berlin, Heidelberg: Springer-Verlag, 2009, pp.
+  219--226. [Online]. Available:
+  \url{http://dl.acm.org/citation.cfm?id=1813809.1813844}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Gabrilovich:2007:CSR:1625275.1625535}
+\BIBentryALTinterwordspacing
+E.~Gabrilovich and S.~Markovitch, ``Computing semantic relatedness using
+  wikipedia-based explicit semantic analysis,'' in \emph{Proceedings of the
+  20th international joint conference on Artifical intelligence}, ser.
+  IJCAI'07.\hskip 1em plus 0.5em minus 0.4em\relax San Francisco, CA, USA:
+  Morgan Kaufmann Publishers Inc., 2007, pp. 1606--1611. [Online]. Available:
+  \url{http://dl.acm.org/citation.cfm?id=1625275.1625535}
+\BIBentrySTDinterwordspacing
+
+\bibitem{garcia-gamallo:2011:IEKA}
+\BIBentryALTinterwordspacing
+M.~Garcia and P.~Gamallo, ``Dependency-based text compression for semantic
+  relation extraction,'' in \emph{Proceedings of the RANLP 2011 Workshop on
+  Information Extraction and Knowledge Acquisition}.\hskip 1em plus 0.5em minus
+  0.4em\relax Hissar, Bulgaria: Association for Computational Linguistics,
+  September 2011, pp. 21--28. [Online]. Available:
+  \url{http://www.aclweb.org/anthology/W/W05/W05-0205}
+\BIBentrySTDinterwordspacing
+
+\bibitem{timbl}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://dig.csail.mit.edu/breadcrumbs/node/215}
+\BIBentrySTDinterwordspacing
+
+\bibitem{wikidump}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{http://en.wikipedia.org/wiki/Wikipedia:Database_download}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mwdump}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://www.mediawiki.org/wiki/Mwdumper}
+\BIBentrySTDinterwordspacing
+
+\bibitem{bliki}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://code.google.com/p/gwtwiki/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{nlp}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://nlp.stanford.edu/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Ratnaparkhi96amaximum}
+A.~Ratnaparkhi, ``A maximum entropy model for part-of-speech tagging,'' 1996.
+
+\bibitem{muc}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC2001T02}
+\BIBentrySTDinterwordspacing
+
+\bibitem{squeryl}
+\BIBentryALTinterwordspacing
+ [Online]. Available: \url{http://squeryl.org/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{geocode}
+\BIBentryALTinterwordspacing
+ [Online]. Available:
+  \url{https://developers.google.com/maps/documentation/geocoding/}
+\BIBentrySTDinterwordspacing
+
+\bibitem{stanforddep}
+M.-C. de~Marne Marie-Catherine~de Marneffe and C.~D. Manning, \emph{Stanford
+  typed dependencies manual}, Stanford University.
+
+\bibitem{nlpdeps}
+M.-C. de~Marneffe, B.~MacCartney, and C.~D. Manning, ``Generating typed
+  dependencies from phrase structure parsers,'' \emph{LREC}, 2006.
+
+\bibitem{nlpfparse}
+D.~Klein and C.~D. Manning, ``Fast extract inference with a factored model for
+  natural language parsing,'' \emph{Advances in Neural Information Processing
+  Systems}, vol.~15, pp. 3--10, 2002.
+
+\bibitem{nlpparser}
+------, ``Accurate unlexicalized parsing,'' \emph{Proceedings of the 41st
+  Meeting of the Association for Computational Linguistics}, pp. 423--430,
+  2003.
+
+\end{thebibliography}

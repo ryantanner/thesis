@@ -1,0 +1,28 @@
+\select@language {english}
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Example of Tokens in output from the Stanford NLP Library}}{20}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Parse Tree Output from the Stanford NLP Library}}{21}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Dependency Relations in the Stanford NLP Library}}{22}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces An Alternative Representation for Dependency Relations}}{23}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Coreference Resolution in the Stanford NLP Library. Excerpted from output from the parse results for the Wikipedia article on World War II.}}{26}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Performance of the Stanford NLP Library. Results shown are averages over five runs. All tests run on a MacBook Pro (2.0Ghz Quad Core, 8 GB RAM)}}{27}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Finding entities related to a property}}{31}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Sample Output of Figure~\ref {sql:prop} (edited for brevity)}}{31}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces An Example of a Dependency Relation Function}}{34}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces A Document Model}}{38}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces Transforming Aliases to Produce Connections}}{38}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces Connections from ``Great Britain''}}{47}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Dependency Graph for ``I gave him my address'' \cite {nlpbook}}}{54}
+\addvspace {10\p@ }
