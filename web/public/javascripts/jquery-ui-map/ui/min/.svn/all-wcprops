@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/!svn/ver/220/trunk/ui/min
+END
+jquery.ui.map.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/220/trunk/ui/min/jquery.ui.map.min.js
+END
+jquery.ui.map.full.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/220/trunk/ui/min/jquery.ui.map.full.min.js
+END
+jquery.ui.map.services.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/220/trunk/ui/min/jquery.ui.map.services.min.js
+END
+jquery.ui.map.overlays.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/220/trunk/ui/min/jquery.ui.map.overlays.min.js
+END

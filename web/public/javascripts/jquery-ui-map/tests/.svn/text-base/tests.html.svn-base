@@ -1,0 +1,131 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript"></script>
+		<!--
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript"></script>
+		-->
+		<script src="../web/jquery.fn.gmap.js" type="text/javascript"></script>
+		<!--
+		<script src="../ui/jquery.ui.map.js" type="text/javascript"></script>
+		-->
+		<script src="../ui/jquery.ui.map.overlays.js" type="text/javascript"></script>
+		<script src="../ui/jquery.ui.map.services.js" type="text/javascript"></script>
+		<script src="../ui/jquery.ui.map.extensions.js" type="text/javascript"></script>
+	</head>
+	<script>
+	$(function() {
+		
+		var map_options = {
+			center: new google.maps.LatLng(0.0, 0.0),
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			zoom: 5	
+		};
+		
+		var reference_markers = [];
+		var reference_map = new google.maps.Map(document.getElementById('map_canvas_reference'), map_options );
+		
+		$('#map_canvas').gmap(map_options).bind('init', function(event, map) { 
+			
+			var bounds = map.getBounds();
+			var southWest = bounds.getSouthWest();
+			var northEast = bounds.getNorthEast();
+			var lngSpan = northEast.lng() - southWest.lng();
+			var latSpan = northEast.lat() - southWest.lat();
+			
+			var tags = [];
+			tags.push("a");
+			tags.push("b");
+			tags.push("c");
+			tags.push("d");
+			tags.push("e");
+			tags.push("f");
+			tags.push("g");
+			tags.push("h");
+			tags.push("i");
+			tags.push("j");
+			
+			for ( i = 0; i < 1000; i++ ) {
+				var temp = [];
+				for ( j = 0; j < Math.random()*5; j++ ) {
+					var index = Math.floor(Math.random()*10);
+					temp.push(tags[index]);
+				}
+				var opts = { 'id': 'm_'+i, 'tags':temp.toString(), 'bounds':false, 'position': new google.maps.LatLng(southWest.lat() + latSpan * Math.random(), southWest.lng() + lngSpan * Math.random()) };
+				$('#map_canvas').gmap('addMarker', opts )/*.click(function() {
+					$('#map_canvas').gmap('openInfoWindow', { 'content': $(this)[0].tags }, this);
+				})*/;
+				
+				opts.map = reference_map;
+				reference_markers.push(new google.maps.Marker(opts));
+				
+			}
+					
+			console.time('addControl');
+			$('#map_canvas').gmap('addControl', 'control', 6);
+			console.timeEnd('addControl');
+			
+			console.time('addShape');
+			$('#map_canvas').gmap('addShape', 'Circle', { 'strokeColor': "#000000", 'strokeOpacity': 0.8, 'strokeWeight': 0, 'fillColor': "#ff4400", 'fillOpacity': 0.35, 'center': map.getCenter(), 'radius': 200000 });
+			console.timeEnd('addShape');
+			
+			console.time('findMarker');
+			$('#map_canvas').gmap('findMarker', 'tags', 'a', ',', function(m, isFound) {
+				if ( !isFound ) {
+					m.setVisible(false);
+				}
+			});
+			console.timeEnd('findMarker');
+			
+			console.time('get set');
+			$('#map_canvas').gmap('get', 'overlays > Circle');
+			console.timeEnd('get set');
+
+			console.time('get markers');
+			$('#map_canvas').gmap('get', 'markers');
+			console.timeEnd('get markers');
+			
+			console.time('get markers specific');
+			$('#map_canvas').gmap('get', 'markers > m_0');
+			console.timeEnd('get markers specific');
+			
+			console.time('clear markers');
+			$('#map_canvas').gmap('clear', 'markers');
+			console.timeEnd('clear markers');
+			
+			console.time('clear markers native');
+			for ( var i = 0; i < reference_markers.length; i++ ) {
+				google.maps.event.clearInstanceListeners(reference_markers[i]);
+				reference_markers[i].setMap(null);
+				reference_markers[i] = null;
+			}
+			console.timeEnd('clear markers native');
+			
+			console.time('loadFusion');
+			$('#map_canvas').gmap('loadFusion', { 'query': { 'from': 297050 } } );
+			console.timeEnd('loadFusion');
+			
+			console.time('search');
+			$('#map_canvas').gmap('search', {'address': 'Stockholm' } , function(results, status) {});
+			console.timeEnd('search');
+			
+			console.time('destroy');
+			$('#map_canvas').gmap('destroy');
+			console.timeEnd('destroy');
+			
+			
+		});
+
+		
+	});
+	</script>
+	<body>
+		<div id="map_canvas" style="height:400px; width:400px;"></div>
+		<div id="map_canvas_reference" style="height:400px; width:400px;"></div>
+		<div id="a" style="display:none;">A</div>
+		<div id="b" style="display:none;">B</div>
+		<div id="c" style="display:none;">C</div>
+		<div id="d" style="display:none;">D</div>
+	</body>
+</html>

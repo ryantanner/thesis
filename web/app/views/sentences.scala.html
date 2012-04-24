@@ -1,0 +1,71 @@
+@(currentPage: Page[Sentence], currentOrderBy: Int, currentFilter: String)(implicit flash: play.api.mvc.Flash)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+    routes.Application.list(newPage, newOrderBy.map { orderBy =>
+        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+    }.getOrElse(currentOrderBy), currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(orderBy: Int, title: String) = {
+    <th class="col@orderBy header @if(scala.math.abs(currentOrderBy) == orderBy) @{if(currentOrderBy < 0) "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, Some(orderBy))">@title</a>
+    </th>
+}
+
+@main {
+    
+    <h1>@Messages("Sentences", currentPage.total)</h1>
+
+    @flash.get("success").map { message =>
+        <div class="alert-message warning">
+            <strong>Done!</strong> @message
+        </div>
+    }
+
+    
+    @Option(currentPage.items).filterNot(_.isEmpty).map { sentences =>
+        
+        <table class="entities zebra-striped">
+            <thead>
+                <tr>
+                    @header(2, "ID")
+                    @header(3, "Sentence")
+                    @header(4, "Document")
+                </tr>
+            </thead>
+            <tbody>
+
+                @sentences.map { 
+                    case sentence => {
+                        <tr>
+                            <td>@sentence.id</td>
+                            <td>@sentence.sent</td>
+                            <td>
+                                @sentence.documentId
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    }.getOrElse {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    }
+
+        
+}
+
+            

@@ -1,0 +1,119 @@
+<!DOCTYPE html> 
+<html> 
+	<head profile="http://dublincore.org/documents/dcq-html/">
+	
+		<title>jQuery mobile with Google maps - Google maps jQuery plugin</title>
+		<meta name="keywords" content="Google maps, jQuery, plugin, mobile, iphone, ipad, android, HTML5" />
+		<meta name="description" content="Examples with jQuery mobile, Google maps and HTML5" />
+		<meta http-equiv="content-language" content="en"/>
+		
+		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+		<meta name="DC.title" content="jQuery mobile with Google maps - Google maps jQuery plugin" />
+		<meta name="DC.subject" content="Google maps;jQuery;plugin;mobile;iphone;ipad;android;HTML5" />
+		<meta name="DC.description" content="Examples with jQuery mobile, Google maps and HTML5" />
+		<meta name="DC.creator" content="Johan S&auml;ll Larsson" />
+		<meta name="DC.language" content="en"/>
+		
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" />
+		<style rel="stylesheet">
+			body {  background: #ddd; }
+			body, #gmap-4, .page { height:100%; }
+			.ui-body-c a.ui-link { color: #008595; font-weight: bold; text-decoration: none; }
+			.hidden { display:none; }
+			.min-width-480px label.ui-input-text { font-weight:bold; display: block; }
+			.adp-directions { width:100%; }
+			.adp-placemark, .adp-summary, .adp-legal { display:none; margin: 0; }
+			.adp-placemark, .adp-step, .adp-stepicon, .adp-substep{ border-top: none;text-align:center; vertical-align: middle; padding: 0.8em 0; background:#e9eaeb;color:#3e3e3e;text-shadow:0 1px 1px #fff;background-image:-moz-linear-gradient(top,#f0f0f0,#e9eaeb);background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#f0f0f0),color-stop(1,#e9eaeb));-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorStr='#f0f0f0', EndColorStr='#e9eaeb')"}
+			.adp-directions tr { border:1px solid #b3b3b3; }
+			h2 { font-size: 16px; overflow: hidden; white-space: nowrap; display: block; }
+			.more { text-align: center; }
+		</style>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>	
+		<script type="text/javascript">
+			// Demonstration purpose only...
+			$(document).bind("mobileinit", function () {
+				$.mobile.ajaxEnabled  = true;
+			});
+		</script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
+		<script type="text/javascript" src="../ui/jquery.ui.map.js"></script>
+		<script type="text/javascript" src="../ui/jquery.ui.map.services.js"></script>
+		<script type="text/javascript" src="../ui/jquery.ui.map.extensions.js"></script>
+	</head> 
+
+	<body> 
+
+		<div data-role="page">
+
+			<div data-role="header">
+				<h1><a data-ajax="false" href="/">jQuery mobile with Google maps v3</a> examples</h1>
+			</div>
+
+			<div data-role="content">	
+				<p>This is an example using the 
+					<a data-ajax="false" href="/" alt="Google map jQuery plugin">Google maps jQuery plugin</a> 
+					together with <a data-ajax="false" href="http://jquerymobile.com" alt="jQuery mobile framework">jQuery mobile framework</a>. Since jquery mobile framework
+					loads links through Ajax you either need to disable the jQuery mobile's Ajax behavior or load the Google maps javascript in the 'real' first page.
+					<em>This example use ajax in navigation.</em>
+				</p>
+				
+				<p>
+					To disable pages loading through Ajax bind 'mobileinit' and override $.mobile.ajaxEnabled (You need to bind 'mobileinit' 
+					before referencing the jQuery mobile script) or add <strong>data-ajax="false"</strong> or <strong>rel="external"</strong> to the link element. 
+				</p>
+				
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a"> 
+					<li data-role="list-divider">jQuery mobile examples</li> 
+					<li><a href="jquery-mobile-example-2.html">Basic map example</a></li> 
+					<li><a href="jquery-mobile-example-4.html">Basic map example with geolocation</a></li>
+					<li><a href="jquery-mobile-example-3.html">Get directions example</a></li> 
+				</ul>
+				
+				<h2>More Google maps and jQuery examples</h2>
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a"> 
+					<li data-role="list-divider">More examples</li> 
+					<li><a data-ajax="false" href="advanced-example.html">Microformats, Google streetview and jQuery dialog example</a></li>
+					<li><a data-ajax="false" href="other-examples.html">Click and drag events with Google geo search example</a></li>
+					<li><a data-ajax="false" href="load JSON example.html">Import markers with JSON example</a></li>
+					<li><a data-ajax="false" href="load Microformat example.html">Import markers with microformats example</a></li>
+					<li><a data-ajax="false" href="load RDFa example.html">Import markers with RDFa example</a></li>
+					<li><a data-ajax="false" href="load Microdata example.html">Import markers with microdata example</a></li>
+					<li><a data-ajax="false" href="load Fusion.html">Import markers with Google Fusion tables</a></li>
+					<li><a data-ajax="false" href="multiple maps example.html">Multiple maps on a single page example</a></li>
+					<li><a data-ajax="false" href="basic-example.html">Google maps and jQuery example</a></li>
+					<li><a data-ajax="false" href="google-maps-jquery-filtering.html">Filter markers example</a></li>
+				</ul>
+
+			</div>
+			
+			<div data-role="footer" data-theme="a">
+				<h3>Need help?</h3>
+				<p class="more">Please feel free to ask for help in the <a data-ajax="false" href="http://groups.google.com/group/jquery-ui-map-discuss">forum</a></p>
+			</div>
+			
+			<div id="ft" class="hidden" itemscope itemtype="http://data-vocabulary.org/Person">
+				Author: 
+				<span itemprop="name">Johan S&auml;ll Larsson</span>  
+				<span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+					<span itemprop="locality">G&ouml;teborg</span>, 
+					<span itemprop="country-name">Sweden</span> 
+				</span>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript">
+				var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+				document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+			try {
+				var pageTracker = _gat._getTracker("UA-17614686-3");
+				pageTracker._trackPageview();
+			} catch(err) {}
+		</script>
+		
+	</body>
+	
+</html>

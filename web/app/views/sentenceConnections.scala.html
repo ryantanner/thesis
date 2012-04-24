@@ -1,0 +1,119 @@
+@(currentPage: Page[SentenceConnection], currentOrderBy: Int, currentId: Long)(implicit flash: play.api.mvc.Flash)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
+    routes.Application.sentenceConnections(newPage, newOrderBy.map { orderBy =>
+        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
+    }.getOrElse(currentOrderBy), currentId)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(orderBy: Int, title: String) = {
+    <th class="col@orderBy header @if(scala.math.abs(currentOrderBy) == orderBy) @{if(currentOrderBy < 0) "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, Some(orderBy))">@title</a>
+    </th>
+}
+
+@main {
+    
+    <h1>@Messages("Connections", currentPage.total)</h1>
+
+    @flash.get("success").map { message =>
+        <div class="alert-message warning">
+            <strong>Done!</strong> @message
+        </div>
+    }
+
+    <div id="actions">
+        
+        @helper.form(action=routes.Application.list()) {
+            <input type="search" id="searchbox" name="f" value="" placeholder="Filter by value...">
+            <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+        }
+        
+        
+    </div>
+    
+    @Option(currentPage.items).filterNot(_.isEmpty).map { connections =>
+        
+        <table class="entities zebra-striped">
+            <thead>
+                <tr>
+                    @header(2, "ID")
+                    @header(3, "Entity")
+                    @header(4, "Sentence")
+                    @header(5, "ID")
+                    @header(6, "Strength")
+                    @header(7, "")
+                </tr>
+            </thead>
+            <tbody>
+
+                @connections.map {
+                    case connection => {
+                        <tr>
+                            <td>@connection.entityId</td>
+                            <td>@connection.entity</td>
+                            <td>
+                                @connection.sentence
+                            </td>
+                            <td>
+                                @connection.sentenceId
+                            </td>
+                            <td>
+                                @connection.sentenceCount
+                            </td>
+                            <td>
+                                @helper.form(action=routes.Application.sentToEnts(0, 0, connection.sentenceId))    {
+                                    <input type="submit" id="sentsubmit" value="View" class="btn primary" />
+                                }
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul>
+                @currentPage.prev.map { page =>
+                    <li class="prev">
+                        <a href="@link(page)">&larr; Previous</a>
+                    </li> 
+                }.getOrElse {
+                    <li class="prev disabled">
+                        <a>&larr; Previous</a>
+                    </li>
+                }
+                <li class="current">
+                    <a>Displaying @(currentPage.offset + 1) to @(currentPage.offset + connections.size) of @currentPage.total</a>
+                </li>
+                @currentPage.next.map { page =>
+                    <li class="next">
+                        <a href="@link(page)">Next &rarr;</a>
+                    </li> 
+                }.getOrElse {
+                    <li class="next disabled">
+                        <a>Next &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    }.getOrElse {
+        
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+        
+    }
+
+        
+}
+
+            

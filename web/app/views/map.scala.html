@@ -1,0 +1,47 @@
+@(entity: EntityKey)(implicit flash: play.api.mvc.Flash)
+
+
+@main {
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100%; min-height: 400px; min-width: 400px; border: 2px solid grey; }
+    </style>
+
+    @flash.get("success").map { message =>
+        <div class="alert-message warning">
+            <strong>Done!</strong> @message
+        </div>
+    }
+
+    <h2>
+        Map for @entity.value
+    </h2>
+
+    <script type="text/javascript">
+        var thesis = thesis || {};
+        thesis.entityId = @entity.id;
+        thesis.entityValue = '@entity.value';
+    </script>
+
+    <div id="actions">
+        
+    </div>
+
+    <div id="map_canvas" style="height: 100%; width: 100%;"></div>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA58OF2AGFfvdnQaitbiuJmYv_femmDa-g&sensor=false"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/modernizr-2.0.6.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.7.2.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/jqueryui.js")"></script>
+<!--    <script type="text/javascript"
+        src="@routes.Assets.at("javascripts/jquery-ui-map/ui/jquery.ui.map.js")"></script>
+    -->
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/script.js")"></script>
+    
+        
+}
+
+            
