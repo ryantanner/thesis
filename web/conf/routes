@@ -12,6 +12,12 @@ GET     /connections/:id            controllers.Application.sentenceConnections(
 
 GET     /sentsToEnts/:id            controllers.Application.sentToEnts(p:Int ?= 0, s:Int ?= 2, id: Long)
 
+GET     /location-info/:id          controllers.Application.entityKeyToLocation(id: Int)
+
+GET     /location/:id               controllers.Application.locations(id: Int)
+
+GET     /intersection/:id1/:id2    controllers.Application.entityIntersection(id1: Long, id2: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 

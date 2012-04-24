@@ -56,8 +56,8 @@ object Geocoder {
                         ThesisSession.insertLocation(
                           l.loc,
                           l.sentenceId,
-                          res.lat.toString,
-                          res.lng.toString)
+                          res.lat,
+                          res.lng)
                       }
                   }
                   case None => {}
